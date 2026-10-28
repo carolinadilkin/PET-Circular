@@ -15,6 +15,7 @@ import streamlit as st
 import storage
 from document_ai import measurements_pending
 from ui_document_ai import render_document_ai
+from ui_assistant import render_assistant
 from pet_circular.engine import assess, validate
 from ui_helpers import (
     APPLICABILITY, EVIDENCE, KIND_LABELS, KINDS, PRESENCE, STATUSES,
@@ -37,7 +38,7 @@ FIELDS=fields_catalog()
 RULES=rule_catalog()
 SOURCES=source_catalog()
 MATRIX_VERSION='0.3.3'
-PAGES=['Visão geral','Produto','Componentes','Dados técnicos','Evidências','IA · Documentos','Avaliação']
+PAGES=['Visão geral','Produto','Componentes','Dados técnicos','Evidências','IA · Documentos','Avaliação','Assistente de ecodesign']
 
 if 'case' not in st.session_state:st.session_state.case=example()
 if 'assessment' not in st.session_state:st.session_state.assessment=None
@@ -341,6 +342,9 @@ elif page=='Evidências':
 
 elif page=='IA · Documentos':
     render_document_ai(case,commit)
+
+elif page=='Assistente de ecodesign':
+    render_assistant(case, current_result())
 
 elif page=='Avaliação':
     st.subheader('Avaliação técnico-científica')

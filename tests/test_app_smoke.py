@@ -47,7 +47,7 @@ class StStub(types.ModuleType):
 
 class TestSmoke(unittest.TestCase):
     def test_all_screens_render_without_python_errors(self):
-        for nav in ['Visão geral','Produto','Componentes','Dados técnicos','Evidências','IA · Documentos','Avaliação']:
+        for nav in ['Visão geral','Produto','Componentes','Dados técnicos','Evidências','IA · Documentos','Avaliação','Assistente de ecodesign']:
             with self.subTest(nav=nav):
                 st=StStub(nav)
                 old=sys.modules.get('streamlit')

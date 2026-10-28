@@ -85,4 +85,12 @@ PET_Circular_App_IA_v02/
   requirements.txt               Dependências
 ```
 
+## Assistente de ecodesign — MVP v0.3 (prova de conceito)
+
+Na barra lateral, abra **Assistente de ecodesign**. O modo **Local — rastreável, sem API** responde com status do motor, campos faltantes, recomendações da matriz e links das referências das regras relacionadas. O modo **IA — OpenAI API** redige a explicação em linguagem natural, mediante chave e consentimento explícito; sua chamada envia somente a pergunta, os resultados relevantes e os trechos das regras (não os PDFs originais). A API não decide compatibilidade e sua resposta exige revisão.
+
+**Limitações:** identificação de regras por palavras-chave/IDs; a interpretação é limitada às 15 regras e ao estado corrente. O modo local não é IA generativa. A chamada externa foi verificada com mock, não com chave real. Dúvidas normativas exigem consulta humana à diretriz, e classe global não é emitida. Histórico da conversa é mantido somente na sessão Streamlit. Com os dados atuais do produto alterados, o diálogo é reiniciado.
+
+**Testes:** `python -m unittest discover -s tests -v` (70 testes offline).
+
 **Próximas entregas:** teste visual de extração e revisão no Windows, validação com documento real completo e autorizado, OCR opcional, avaliação de precisão da IA e melhorias de usabilidade. O agente conversacional e a plataforma multiempresa permanecem fora deste MVP.
