@@ -1,0 +1,688 @@
+{
+  "columns": [
+    "Campo / chave",
+    "Tipo",
+    "Obrigatoriedade",
+    "Domínio / unidade",
+    "Regras usuárias",
+    "Origem esperada",
+    "Validação / observação"
+  ],
+  "fields": [
+    [
+      "material_corpo",
+      "Lista",
+      "Obrigatório",
+      "PET | outro | desconhecido",
+      "PET-01,02,03",
+      "Ficha de composição / BOM",
+      "Não deduzir de foto"
+    ],
+    [
+      "transparencia_corpo",
+      "Lista",
+      "Obrigatório",
+      "transparente | opaco | desconhecido",
+      "PET-01,03",
+      "Especificação óptica",
+      "Opaco → fora do MVP"
+    ],
+    [
+      "cor_corpo",
+      "Lista",
+      "Obrigatório",
+      "incolor | azul-claro | preta | outra | desconhecida",
+      "PET-01,03",
+      "Especificação técnica",
+      "Não inferir pigmento pela cor"
+    ],
+    [
+      "evidencia_composicao",
+      "Texto / documento",
+      "Condicional",
+      "ficha técnica, declaração, análise",
+      "PET-01,02",
+      "Fornecedor / fabricante",
+      "Fonte e versão obrigatórias"
+    ],
+    [
+      "tipo_estrutura_corpo",
+      "Lista",
+      "Condicional",
+      "monocamada | blenda | multicamada | desconhecida",
+      "PET-02,12",
+      "BOM / desenho de camadas",
+      "Exigir se polímero adicional"
+    ],
+    [
+      "polimeros_corpo_secundarios",
+      "Múltipla escolha",
+      "Condicional",
+      "PLA | PVC | PS | PETG | PC | PBT | EVOH | PA-MXD6 | outro | nenhum",
+      "PET-02,12",
+      "BOM/ficha de material",
+      "Não considerar rótulo como corpo"
+    ],
+    [
+      "aditivos_corpo",
+      "Texto estruturado",
+      "Condicional",
+      "tipo químico; concentração; finalidade",
+      "PET-03",
+      "Ficha de formulação",
+      "Evitar inferir carbon black"
+    ],
+    [
+      "funcao_aditivo",
+      "Lista",
+      "Condicional",
+      "reaquecimento | pigmento | outro | desconhecida",
+      "PET-03",
+      "Ficha do fornecedor",
+      "Negro de fumo reheat necessita função"
+    ],
+    [
+      "volume_ml",
+      "Número",
+      "Obrigatório",
+      "mL; >0",
+      "PET-04,16",
+      "Especificação do produto",
+      "Conversão coerente para L"
+    ],
+    [
+      "tipo_decoracao",
+      "Lista",
+      "Obrigatório condicional",
+      "ausente | rótulo | sleeve | impressão direta | outras",
+      "PET-04,05,19",
+      "Desenho da embalagem",
+      "Pode haver múltiplos"
+    ],
+    [
+      "polimero_decoracao",
+      "Lista",
+      "Condicional",
+      "PE | PP | OPP | PVC | PET | PETG | PS | EPS | PLA | outro",
+      "PET-04,05,19",
+      "Ficha de rótulo/sleeve",
+      "Verificar forma e composição efetiva"
+    ],
+    [
+      "cobertura_nao_pet_pct",
+      "Número",
+      "Condicional",
+      "% 0–100",
+      "PET-04,19",
+      "Projeto gráfico/medição",
+      "P-01: método operacional pendente"
+    ],
+    [
+      "metodo_cobertura",
+      "Texto / protocolo",
+      "Condicional",
+      "denominador, faces, geometria, evidência",
+      "PET-04",
+      "Medição geométrica",
+      "Não presumir % de sleeve"
+    ],
+    [
+      "criterio_sep01",
+      "Derivado pelo motor (enum)",
+      "Não é pergunta ao fabricante",
+      "gatilho aplicável | não identificado | desconhecido",
+      "PET-04,19",
+      "SEP-01 v3.0",
+      "Aplicabilidade do SEP-01 requer critérios técnicos e evidência; determinação ainda pendente (AC-08)."
+    ],
+    [
+      "tipo_rotulo",
+      "Lista",
+      "Condicional",
+      "rótulo comum | espumado | papel | metalizado | outro",
+      "PET-05",
+      "Ficha do rótulo",
+      "Forma física afeta classe"
+    ],
+    [
+      "polimero_rotulo",
+      "Lista",
+      "Condicional",
+      "PE | PP | OPP | PET | PVC | PS | PETG | PLA | outro",
+      "PET-05",
+      "Ficha técnica",
+      null
+    ],
+    [
+      "densidade_rotulo",
+      "Número",
+      "Condicional",
+      "g/cm³",
+      "PET-05",
+      "Ficha da estrutura final",
+      "Cargas e tintas podem alterar densidade"
+    ],
+    [
+      "fixacao_rotulo",
+      "Lista",
+      "Condicional",
+      "adesivo | soldado | outro | desconhecido",
+      "PET-05",
+      "Projeto de fixação",
+      null
+    ],
+    [
+      "desprendimento",
+      "Lista",
+      "Condicional",
+      "comprovado | não desprende | desconhecido",
+      "PET-05,09",
+      "Ensaio/ficha",
+      "Rótulo solto ≠ adesivo dissolvido"
+    ],
+    [
+      "evidencias_NIR",
+      "Documento",
+      "Condicional",
+      "relatório SEP-01 ou especificação",
+      "PET-04,05,19",
+      "Centro de ensaio / fornecedor",
+      "Não estimar eficiência de triagem"
+    ],
+    [
+      "material_tampa",
+      "Lista",
+      "Condicional",
+      "PE | PP | PET | outro | ausente | desconhecido",
+      "PET-07",
+      "Ficha fechamento",
+      "Obrigatório se tampa presente"
+    ],
+    [
+      "densidade_tampa",
+      "Número",
+      "Condicional",
+      "g/cm³; formulação final",
+      "PET-07",
+      "Ficha/ensaio",
+      "Para PE/PP, não generalizar PET"
+    ],
+    [
+      "transparencia_tampa_pet",
+      "Lista",
+      "Condicional",
+      "transparente | opaco | desconhecido",
+      "PET-07",
+      "Ficha/tampa PET",
+      "Apenas se material PET"
+    ],
+    [
+      "cor_tampa_pet",
+      "Lista",
+      "Condicional",
+      "incolor | colorida | desconhecida",
+      "PET-07",
+      "Ficha/tampa PET",
+      "PET transparente incolor é exceção"
+    ],
+    [
+      "aditivos_tampa",
+      "Texto estruturado",
+      "Condicional",
+      "tipos + aprovação",
+      "PET-07",
+      "Ficha fornecedor",
+      "Só se PET"
+    ],
+    [
+      "fixacao_tampa",
+      "Lista",
+      "Condicional",
+      "separável | soldado | não desprende | tethered | desconhecido",
+      "PET-07",
+      "Projeto/ensaio",
+      "Tethered ≠ automaticamente incompatível"
+    ],
+    [
+      "liners_vedantes",
+      "Texto estruturado",
+      "Condicional",
+      "material, densidade, separabilidade",
+      "PET-07",
+      "BOM fechamento",
+      "Exige avaliação própria"
+    ],
+    [
+      "adesivo_tipo",
+      "Texto / lista",
+      "Condicional",
+      "tipo químico/família",
+      "PET-09",
+      "Ficha de adesivo",
+      "Química não prova comportamento"
+    ],
+    [
+      "comportamento_adesivo",
+      "Lista",
+      "Condicional",
+      "liberável | solúvel | não liberável | desconhecido",
+      "PET-09",
+      "Ficha/ensaio",
+      "70–90°C em água/álcali"
+    ],
+    [
+      "faixa_temperatura",
+      "Número/texto",
+      "Condicional",
+      "°C",
+      "PET-09",
+      "Laudo do adesivo",
+      null
+    ],
+    [
+      "meio_lavagem",
+      "Lista",
+      "Condicional",
+      "água | alcalino | outro",
+      "PET-09",
+      "Protocolo/ficha",
+      null
+    ],
+    [
+      "evidencia_desprendimento",
+      "Documento",
+      "Condicional",
+      "resultado de teste em aplicação real",
+      "PET-09",
+      "Laudo ou declaração técnica",
+      null
+    ],
+    [
+      "barreira_tipo",
+      "Lista múltipla",
+      "Condicional",
+      "nenhuma | SiOx | EVOH | PA-MXD6 | outra | desconhecida",
+      "PET-11,12",
+      "Ficha estrutura",
+      "Exige composição por camada"
+    ],
+    [
+      "deposicao_barreira",
+      "Lista",
+      "Condicional",
+      "plasma | outra | desconhecida",
+      "PET-11",
+      "Ficha de processo",
+      "Se SiOx, plasma confirmado"
+    ],
+    [
+      "arquitetura_camadas",
+      "Lista",
+      "Condicional",
+      "monocamada | multicamada | blenda | revestimento",
+      "PET-12",
+      "Projeto de camadas",
+      null
+    ],
+    [
+      "percentual_pa_mxd6_massa",
+      "Número",
+      "Condicional",
+      "% em massa 0–100",
+      "PET-12",
+      "BOM camadas",
+      "PA-MXD6 multicamada; limite 5%"
+    ],
+    [
+      "tie_layer",
+      "Lista",
+      "Condicional",
+      "sim | não | desconhecido",
+      "PET-12",
+      "Desenho de camadas",
+      null
+    ],
+    [
+      "marcacao_tecnologia",
+      "Lista",
+      "Condicional",
+      "laser | tinta | outra | nenhuma",
+      "PET-13",
+      "Ficha de marcação",
+      null
+    ],
+    [
+      "marcacao_finalidade",
+      "Lista",
+      "Condicional",
+      "produção | validade | decoração | outra",
+      "PET-13",
+      "Ficha de design",
+      "Não equiparar lote a data sem fonte"
+    ],
+    [
+      "marcacao_local",
+      "Lista",
+      "Condicional",
+      "corpo PET | rótulo | sleeve | outro",
+      "PET-13",
+      "Projeto gráfico",
+      null
+    ],
+    [
+      "volume_l",
+      "Número",
+      "Derivado de volume_ml",
+      "L; >0",
+      "PET-16",
+      "Conversão de volume_ml / 1000",
+      "volume_l = volume_ml/1000; derivado, não perguntar novamente (AC-10)."
+    ],
+    [
+      "dimensoes_apos_compactacao",
+      "Número / documento",
+      "Condicional",
+      "cm; método validado",
+      "PET-16",
+      "Ensaio pós-compactação",
+      "P-02 pendente"
+    ],
+    [
+      "protocolo_compactacao",
+      "Documento",
+      "Condicional",
+      "método, condição, medição",
+      "PET-16",
+      "SEP-01 / método validado",
+      "Não inferir de CAD"
+    ],
+    [
+      "produto_tipo",
+      "Lista",
+      "Condicional",
+      "líquido | creme | gel | pasta | sólido | outro",
+      "PET-17",
+      "Especificação produto",
+      null
+    ],
+    [
+      "peso_embalagem_vazia_g",
+      "Número",
+      "Condicional",
+      "g ≥0",
+      "PET-17",
+      "Ensaio Easy-to-Empty",
+      null
+    ],
+    [
+      "massa_conteudo_nominal_g",
+      "Número",
+      "Condicional",
+      "g >0",
+      "PET-17",
+      "Especificação/ensaio",
+      "Para volume, converter para massa"
+    ],
+    [
+      "media_pos_esvaziar_g",
+      "Número",
+      "Condicional",
+      "g",
+      "PET-17",
+      "≥10 ensaios",
+      null
+    ],
+    [
+      "numero_ensaios",
+      "Número",
+      "Condicional",
+      "inteiro ≥10",
+      "PET-17",
+      "Registro experimental",
+      null
+    ],
+    [
+      "metodo_ete",
+      "Documento",
+      "Condicional",
+      "protocolo/repetições/condições",
+      "PET-17",
+      "RecyClass Online Tool",
+      null
+    ],
+    [
+      "tinta_formulacao",
+      "Texto",
+      "Condicional",
+      "pigmentos, ligantes, solventes",
+      "PET-18",
+      "SDS/ficha",
+      null
+    ],
+    [
+      "tinta_bleeding",
+      "Lista",
+      "Condicional",
+      "retentiva | bleeding | desconhecida",
+      "PET-18",
+      "REP-PETbot-03",
+      null
+    ],
+    [
+      "tinta_washable",
+      "Lista",
+      "Condicional",
+      "sim | não | desconhecido",
+      "PET-18",
+      "Ficha/ensaio",
+      null
+    ],
+    [
+      "tinta_metalica",
+      "Lista",
+      "Condicional",
+      "sim | não | desconhecido",
+      "PET-18",
+      "Ficha do fabricante",
+      null
+    ],
+    [
+      "tinta_ligantes",
+      "Lista/texto",
+      "Condicional",
+      "PVC/clorados | outros | desconhecido",
+      "PET-18",
+      "Ficha composição",
+      null
+    ],
+    [
+      "EUPIA_declaracao",
+      "Documento",
+      "Condicional",
+      "sim / não / não comprovado",
+      "PET-18",
+      "EuPIA Charter/ficha",
+      "Não comprova bleaching"
+    ],
+    [
+      "sleeve_tipo",
+      "Lista",
+      "Condicional",
+      "parcial | integral | twin-perforated | outro",
+      "PET-19",
+      "Projeto embalagem",
+      null
+    ],
+    [
+      "sleeve_densidade",
+      "Número",
+      "Condicional",
+      "g/cm³",
+      "PET-19",
+      "Estrutura final",
+      null
+    ],
+    [
+      "sleeve_ir",
+      "Lista",
+      "Condicional",
+      "translúcido IR | não | desconhecido",
+      "PET-19",
+      "Ficha/ensaio",
+      "Translucidez não confirma NIR"
+    ],
+    [
+      "dupla_perfuracao",
+      "Lista",
+      "Condicional",
+      "sim | não | desconhecido",
+      "PET-19",
+      "Desenho/sleeve",
+      "Consultar EPBP por aplicação"
+    ],
+    [
+      "aplicacao_produto",
+      "Lista/texto",
+      "Condicional",
+      "alimentos | doméstico | higiene pessoal | outros",
+      "PET-19",
+      "Ficha produto",
+      "Condição interim twin perforated"
+    ],
+    [
+      "estado_dado",
+      "Lista",
+      "Transversal",
+      "confirmado | declarado | proposto | ausente | conflitante | não aplicável",
+      "PET-14",
+      "Governança",
+      "Sempre separar estado e resultado"
+    ],
+    [
+      "fonte_dado",
+      "Texto/URI",
+      "Transversal",
+      "arquivo, página, versão, extrator",
+      "PET-14",
+      "Documento original",
+      "Proveniência auditável"
+    ],
+    [
+      "confirmacao_humana",
+      "Lista",
+      "Transversal",
+      "pendente | aprovada | rejeitada",
+      "PET-14",
+      "Usuário responsável",
+      null
+    ],
+    [
+      "origem_composicao",
+      "Metadado de proveniência",
+      "Transversal condicional",
+      "ID da evidência/fornecedor/documento",
+      "PET-02",
+      "Registro da origem do dado de composição",
+      "Não substituir por evidencia_composicao sem vínculo de proveniência"
+    ],
+    [
+      "ficha_tecnica",
+      "Documento",
+      "Condicional quando aditivo analisado",
+      "ID/URI de ficha técnica",
+      "PET-03",
+      "Fornecedor do aditivo",
+      "Função reheat precisa ser confirmada"
+    ],
+    [
+      "forma_rotulo",
+      "Lista",
+      "Quando rótulo presente",
+      "convencional | espumado | papel | outro | desconhecida",
+      "PET-05",
+      "Ficha do rótulo",
+      "Distinguir PS comum de EPS e PET espumado"
+    ],
+    [
+      "ficha_barreira",
+      "Documento",
+      "Quando revestimento/barreira presente",
+      "ID/URI de ficha técnica",
+      "PET-11",
+      "Fornecedor da barreira",
+      "Tecnologia SiOx plasma deve constar na ficha"
+    ],
+    [
+      "outras_camadas",
+      "Lista estruturada",
+      "Quando houver estrutura multicamada",
+      "Material, posição, espessura/teor se disponível",
+      "PET-11",
+      "BOM / ficha estrutura",
+      "Não inferir compatibilidade da estrutura a partir do SiOx"
+    ],
+    [
+      "evidencia_estrutura",
+      "Documento / BOM",
+      "Quando barreira polimérica presente",
+      "ID/URI, composição e camadas",
+      "PET-12",
+      "BOM / fornecedor",
+      "Vincular teor PA-MXD6 e tie layers"
+    ],
+    [
+      "ficha_marcacao",
+      "Documento",
+      "Quando marcação direta presente",
+      "ID/URI da arte/ficha de processo",
+      "PET-13",
+      "Engenharia / fornecedor",
+      "Comprovar técnica, superfície e finalidade"
+    ],
+    [
+      "versao_documento",
+      "Metadado de proveniência",
+      "Quando documento é evidência",
+      "Versão + data + identificador",
+      "PET-14",
+      "Metadados da fonte",
+      "Não perguntar separadamente se já consta no arquivo"
+    ],
+    [
+      "fonte_medicao",
+      "Documento / relatório",
+      "Quando compactação declarada",
+      "ID/URI + método + data",
+      "PET-16",
+      "Laboratório / relatório",
+      "Sem método aprovado, não concluir gatilho 4 cm"
+    ],
+    [
+      "protocolo_tintas",
+      "Protocolo / relatório",
+      "Quando necessária comprovação de tinta",
+      "ID do ensaio/relatório; REP-PETbot-03 se aplicável",
+      "PET-18",
+      "Fornecedor/laboratório",
+      "Evitar classificar retentividade só pela aparência"
+    ],
+    [
+      "sleeve_polimero",
+      "Lista",
+      "Quando sleeve presente",
+      "PE | PP | OPP | EPS | PET espumado | LDPET | PETG | outro | desconhecido",
+      "PET-19",
+      "Ficha do sleeve",
+      "Chave de componente; não forçar alias com polímero genérico da decoração"
+    ],
+    [
+      "sleeve_cobertura_pct",
+      "Número",
+      "Quando sleeve presente e cobertura pertinente",
+      "% 0–100; método de determinação",
+      "PET-19",
+      "Projeto/medição",
+      "Não equiparar automaticamente à soma de cobertura não-PET"
+    ]
+  ]
+}

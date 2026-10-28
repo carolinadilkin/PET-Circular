@@ -1,0 +1,145 @@
+{
+  "REF-04": {
+    "Código": "REF-04",
+    "Instituição/autoria": "RecyClass",
+    "Documento": "Design for Recycling Guidelines — Transparent Clear & Light-Blue PET Bottles",
+    "Versão / data": "mar/2026",
+    "Utilização na matriz": "Diretriz técnica principal (todos os critérios materiais)",
+    "Seção": "Main Body; Attachments; Decoration",
+    "URL oficial / DOI": "https://recyclass.eu/wp-content/uploads/2026/04/RecyClass-DfR-Guidelines-Transparent-clear-light-blue-PET-bottles.pdf",
+    "Estado de conferência": "PDF oficial aberto e imagem conferida em 27/10/2026",
+    "Ressalva de aplicação": "Critérios europeus; não certificação; preservar versão no grounding"
+  },
+  "REF-09": {
+    "Código": "REF-09",
+    "Instituição/autoria": "RecyClass",
+    "Documento": "Sorting Evaluation Protocol SEP-01 v3.0",
+    "Versão / data": "fev/2026",
+    "Utilização na matriz": "Triagem: condições de ensaio, NIR, compactação, peneira",
+    "Seção": "Seções 4.1–4.13; Anexos",
+    "URL oficial / DOI": "https://recyclass.eu/wp-content/uploads/2026/03/SEP-01-V3.0.pdf",
+    "Estado de conferência": "PDF oficial aberto em 27/10/2026",
+    "Ressalva de aplicação": "Protocolo experimental distinto da tabela DfR; usar instalações reconhecidas quando exigido"
+  },
+  "REF-05": {
+    "Código": "REF-05",
+    "Instituição/autoria": "RecyClass",
+    "Documento": "Packaging Recyclability Methodology v3.1",
+    "Versão / data": "ago/2025 (versão informada)",
+    "Utilização na matriz": "Método de classificação global, penalizações, EtE",
+    "Seção": "Metodologia geral",
+    "URL oficial / DOI": "https://recyclass.eu/resources/",
+    "Estado de conferência": "Página oficial de recursos consultada; arquivo exato a conferir",
+    "Ressalva de aplicação": "P-03 reconfirmar penalização/triagem antes do score; não calcular classe oficial como certificação"
+  },
+  "REF-10": {
+    "Código": "REF-10",
+    "Instituição/autoria": "RecyClass",
+    "Documento": "Easy-to-Empty / Easy-to-Access — orientações Online Tool",
+    "Versão / data": "Versão web",
+    "Utilização na matriz": "Protocolo e fórmula de resíduo de produto",
+    "Seção": "Easy-to-Empty",
+    "URL oficial / DOI": "https://tool.recyclass.eu/en/easy-to-empty-easy-to-access/",
+    "Estado de conferência": "Página oficial consultada em 27/10/2026",
+    "Ressalva de aplicação": "Medição ≥10 ensaios; não extrapolar uma formulação"
+  },
+  "REF-06": {
+    "Código": "REF-06",
+    "Instituição/autoria": "APR",
+    "Documento": "RES-SORT-01 — Near Infrared Sorting of Whole Rigid Plastic Packages",
+    "Versão / data": "rev. 23/10/2024 (v0.2)",
+    "Utilização na matriz": "Contexto NIR; orientação complementar",
+    "Seção": "Páginas 2, 4–6",
+    "URL oficial / DOI": "https://plasticsrecycling.org/documents/res-sort-01/",
+    "Estado de conferência": "URL herdada da v0.2; conferência específica pendente",
+    "Ressalva de aplicação": "APR ≠ RecyClass: não misturar cortes/metodologias"
+  },
+  "REF-08": {
+    "Código": "REF-08",
+    "Instituição/autoria": "EPBP",
+    "Documento": "EPBP Guidelines — PET Bottles",
+    "Versão / data": "Versão web",
+    "Utilização na matriz": "Dupla perfuração e diretrizes PET complementares",
+    "Seção": "Design Guidelines",
+    "URL oficial / DOI": "https://www.epbp.org/design-guidelines/products",
+    "Estado de conferência": "URL herdada da v0.2; condição twin-perforated a confirmar",
+    "Ressalva de aplicação": "Não elevar condição interim a compatibilidade plena"
+  },
+  "REF-11": {
+    "Código": "REF-11",
+    "Instituição/autoria": "RecyClass",
+    "Documento": "Recyclability Evaluation Protocol for Inks Applied on PET Decorations (REP-PETbot-03)",
+    "Versão / data": "Versão a confirmar",
+    "Utilização na matriz": "Migração/retentividade de tintas em decoração",
+    "Seção": "Protocolo específico",
+    "URL oficial / DOI": "https://recyclass.eu/protocols-guidelines/testing-protocols/",
+    "Estado de conferência": "Página oficial de protocolos verificada; caminho PDF definitivo a confirmar",
+    "Ressalva de aplicação": "A IA não infere bleeding pela cor"
+  },
+  "REF-01": {
+    "Código": "REF-01",
+    "Instituição/autoria": "Zhou et al.",
+    "Documento": "PLOS ONE — ATR-FTIR + random forest em plásticos complexos",
+    "Versão / data": "2026",
+    "Utilização na matriz": "Fundamentação acadêmica de identificação, não pontuação",
+    "Seção": "Artigo científico",
+    "URL oficial / DOI": "https://doi.org/10.1371/journal.pone.0342178",
+    "Estado de conferência": "Herdada da v0.2; DOI a conferir",
+    "Ressalva de aplicação": "Acurácia de classe espectral ≠ reciclabilidade"
+  },
+  "REF-02": {
+    "Código": "REF-02",
+    "Instituição/autoria": "Zhu et al.",
+    "Documento": "Polymers — NIR + SVC para envelhecimento de PP",
+    "Versão / data": "2025",
+    "Utilização na matriz": "Contexto acadêmico, fora motor PET",
+    "Seção": "Artigo científico",
+    "URL oficial / DOI": "https://doi.org/10.3390/polym17050700",
+    "Estado de conferência": "Herdada da v0.2; DOI a conferir",
+    "Ressalva de aplicação": "Não transpor resultado PP para triagem PET"
+  },
+  "REF-03": {
+    "Código": "REF-03",
+    "Instituição/autoria": "Martinez-Hernandez et al.",
+    "Documento": "Sensors — reconhecimento Vis-NIR de baixo custo",
+    "Versão / data": "2024",
+    "Utilização na matriz": "Contexto de sensores low-cost",
+    "Seção": "Artigo científico",
+    "URL oficial / DOI": "https://doi.org/10.3390/s24092821",
+    "Estado de conferência": "Herdada da v0.2; DOI a conferir",
+    "Ressalva de aplicação": "Não equiparar Vis-NIR 410–940 nm ao NIR industrial"
+  },
+  "REF-07": {
+    "Código": "REF-07",
+    "Instituição/autoria": "Feira de Conexões CBQ",
+    "Documento": "Regulamento e documentação do evento",
+    "Versão / data": "2026 (v0.2)",
+    "Utilização na matriz": "Contexto de entrega acadêmica",
+    "Seção": "Art. 12 e demais regras",
+    "URL oficial / DOI": "https://www.abq.org.br/cbq/",
+    "Estado de conferência": "Herdada da v0.2; arquivo regulamento não incluído",
+    "Ressalva de aplicação": "Não constitui base técnica de reciclabilidade"
+  },
+  "REF-INT": {
+    "Código": "REF-INT",
+    "Instituição/autoria": "Equipe PET Circular",
+    "Documento": "Decisões de validação interativa PET-01 a PET-19",
+    "Versão / data": "out/2026",
+    "Utilização na matriz": "Governança, dados, estrutura IA, fusões e interpretação",
+    "Seção": "Registro desta conversa",
+    "URL oficial / DOI": "Registro da sessão; sem URL externa",
+    "Estado de conferência": "Decisões tomadas pelo usuário na revisão",
+    "Ressalva de aplicação": "Não confundir decisão interna com requisito da RecyClass"
+  },
+  "REF-CHG": {
+    "Código": "REF-CHG",
+    "Instituição/autoria": "RecyClass",
+    "Documento": "Online Tool — Changelog",
+    "Versão / data": "jun/2026 última listada no site",
+    "Utilização na matriz": "Monitorar atualizações e revisão do grounding",
+    "Seção": "v3.2.1; v3.2",
+    "URL oficial / DOI": "https://tool.recyclass.eu/en/changelog/",
+    "Estado de conferência": "Página oficial consultada em 27/10/2026",
+    "Ressalva de aplicação": "Mudança detectada deve gerar proposta e revisão humana, nunca atualização silenciosa"
+  }
+}
