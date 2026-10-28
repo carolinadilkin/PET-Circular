@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PET Circular — Contrato de entrada do produto (MVP)",
+  "description": "Contrato proposto de envelope da avaliação, independente do dicionário de 75 campos canônicos.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "project_id",
+    "product_id",
+    "product_name",
+    "phase",
+    "matrix_version",
+    "facts",
+    "components",
+    "documents"
+  ],
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "product_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "product_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "phase": {
+      "enum": [
+        "ideacao",
+        "projeto_definido"
+      ]
+    },
+    "matrix_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "design_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "free_description": {
+      "type": "string"
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/fact"
+      }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/component"
+      }
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/document"
+      }
+    }
+  },
+  "$defs": {
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "value",
+        "evidence_status",
+        "applicability",
+        "evidence_ids"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "value": {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_status": {
+          "enum": [
+            "CONFIRMADO",
+            "DECLARADO",
+            "EXTRAIDO_PENDENTE",
+            "PROPOSTO",
+            "AUSENTE",
+            "CONFLITANTE"
+          ]
+        },
+        "applicability": {
+          "enum": [
+            "SIM",
+            "NAO",
+            "DESCONHECIDA"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "human_confirmed_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "observation": {
+          "type": "string"
+        }
+      }
+    },
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "presence"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "corpo",
+            "tampa",
+            "rotulo",
+            "sleeve",
+            "adesivo",
+            "tinta",
+            "barreira",
+            "liner",
+            "valvula",
+            "lacre",
+            "outro"
+          ]
+        },
+        "presence": {
+          "enum": [
+            "SIM",
+            "NAO",
+            "DESCONHECIDA"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "filename",
+        "source_type"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "filename": {
+          "type": "string"
+        },
+        "source_type": {
+          "enum": [
+            "upload",
+            "url_oficial",
+            "declaracao"
+          ]
+        },
+        "url": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string"
+        },
+        "locator": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

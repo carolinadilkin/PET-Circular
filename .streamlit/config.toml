@@ -1,0 +1,13 @@
+[theme]
+base="light"
+primaryColor="#187763"
+backgroundColor="#F8FAF8"
+secondaryBackgroundColor="#EAF3EF"
+textColor="#19352D"
+font="sans serif"
+[server]
+address="127.0.0.1"
+headless=true
+maxUploadSize=20
+[browser]
+gatherUsageStats=false

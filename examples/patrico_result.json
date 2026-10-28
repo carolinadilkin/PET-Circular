@@ -1,0 +1,304 @@
+{
+  "engine_version": "0.1.0",
+  "matrix_version": "0.3.3",
+  "product_id": "PET00.500MLCLROPBSIC",
+  "product_name": "Patrico — garrafa transparente 500 mL",
+  "design_version": "ficha-documental-1",
+  "phase": "projeto_definido",
+  "scope": "DENTRO",
+  "global_recyclability_class": "NAO_EMITIDA",
+  "official_certification": false,
+  "summary": {
+    "incompatibilities_confirmed": [],
+    "rules_inconclusive": [
+      "PET-14",
+      "PET-02",
+      "PET-03",
+      "PET-04",
+      "PET-07",
+      "PET-09",
+      "PET-11",
+      "PET-12",
+      "PET-13",
+      "PET-16",
+      "PET-17",
+      "PET-18",
+      "PET-05",
+      "PET-19"
+    ],
+    "trials_pending": [],
+    "data_issues": [],
+    "notes": [
+      "Avaliação demonstrativa por regras individuais; não constitui certificação RecyClass.",
+      "Sem classe global mesmo quando todos os critérios individuais parecem favoráveis.",
+      "Regras com método ou ensaio pendente não recebem aprovação presumida."
+    ]
+  },
+  "results": [
+    {
+      "rule_id": "PET-14",
+      "status": "INCONCLUSIVO",
+      "reason": "Dados incompletos ou ainda não confirmados",
+      "missing": [
+        "presenca_barreira",
+        "presenca_rotulo",
+        "presenca_sleeve",
+        "presenca_tampa"
+      ],
+      "evidence_ids": [],
+      "warnings": [
+        "Dados provisórios: material_tampa"
+      ],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {
+        "provisorios": [
+          "material_tampa"
+        ]
+      },
+      "sources": [
+        "REF-INT"
+      ]
+    },
+    {
+      "rule_id": "PET-01",
+      "status": "COMPATIVEL",
+      "reason": "PET transparente incolor/azul-claro confirmado; apenas material/cor do corpo",
+      "missing": [],
+      "evidence_ids": [
+        "DOC01"
+      ],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-02",
+      "status": "INCONCLUSIVO",
+      "reason": "Composição de polímeros adicionais não confirmada",
+      "missing": [
+        "polimeros_corpo_secundarios"
+      ],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-03",
+      "status": "INCONCLUSIVO",
+      "reason": "Composição dos aditivos do corpo não documentada",
+      "missing": [
+        "aditivos_corpo"
+      ],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04",
+        "REF-06"
+      ]
+    },
+    {
+      "rule_id": "PET-04",
+      "status": "INCONCLUSIVO",
+      "reason": "Decoração não confirmada",
+      "missing": [
+        "presenca_rotulo_ou_sleeve"
+      ],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04",
+        "REF-09",
+        "REF-06"
+      ]
+    },
+    {
+      "rule_id": "PET-07",
+      "status": "INCONCLUSIVO",
+      "reason": "Presença de tampa não confirmada",
+      "missing": [
+        "presenca_tampa"
+      ],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-09",
+      "status": "INCONCLUSIVO",
+      "reason": "Presença de adesivo não confirmada",
+      "missing": [
+        "presenca_adesivo"
+      ],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-11",
+      "status": "INCONCLUSIVO",
+      "reason": "Presença de barreira não confirmada",
+      "missing": [
+        "presenca_barreira"
+      ],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-12",
+      "status": "INCONCLUSIVO",
+      "reason": "Presença de barreira não confirmada",
+      "missing": [
+        "presenca_barreira"
+      ],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-13",
+      "status": "INCONCLUSIVO",
+      "reason": "Tecnologia de marcação não informada",
+      "missing": [
+        "marcacao_tecnologia"
+      ],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-16",
+      "status": "INCONCLUSIVO",
+      "reason": "Capacidade avaliada quando disponível; compactação pendente",
+      "missing": [
+        "dimensoes_apos_compactacao",
+        "protocolo_compactacao"
+      ],
+      "evidence_ids": [
+        "DOC01"
+      ],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {
+        "capacidade_l": 0.5,
+        "gatilho_5l": false
+      },
+      "sources": [
+        "REF-04",
+        "REF-09",
+        "REF-06"
+      ]
+    },
+    {
+      "rule_id": "PET-17",
+      "status": "INCONCLUSIVO",
+      "reason": "Tipo de produto e aplicabilidade do ensaio não confirmados",
+      "missing": [
+        "produto_tipo"
+      ],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04",
+        "REF-05",
+        "REF-10"
+      ]
+    },
+    {
+      "rule_id": "PET-18",
+      "status": "INCONCLUSIVO",
+      "reason": "Presença de tinta não confirmada",
+      "missing": [
+        "presenca_tinta"
+      ],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04",
+        "REF-11"
+      ]
+    },
+    {
+      "rule_id": "PET-05",
+      "status": "INCONCLUSIVO",
+      "reason": "Presença de rotulo não confirmada",
+      "missing": [
+        "presenca_rotulo"
+      ],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-19",
+      "status": "INCONCLUSIVO",
+      "reason": "Presença de sleeve não confirmada",
+      "missing": [
+        "presenca_sleeve"
+      ],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04",
+        "REF-09",
+        "REF-08"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "project_id": "piloto-patrico-001",
+  "product_id": "PET00.500MLCLROPBSIC",
+  "product_name": "Patrico — garrafa transparente 500 mL",
+  "phase": "projeto_definido",
+  "matrix_version": "0.3.3",
+  "design_version": "ficha-documental-1",
+  "free_description": "Piloto documental apenas com especificação pública do corpo; não é avaliação da embalagem final envasada.",
+  "facts": [
+    {
+      "key": "material_corpo",
+      "value": "PET",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "DOC01"
+      ],
+      "observation": "PET informado na ficha; confirmação restrita ao campo de material do corpo."
+    },
+    {
+      "key": "transparencia_corpo",
+      "value": "transparente",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "DOC01"
+      ]
+    },
+    {
+      "key": "cor_corpo",
+      "value": "incolor",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "DOC01"
+      ],
+      "observation": "Clear; sem prova L*a*b*."
+    },
+    {
+      "key": "capacidade_ml",
+      "value": 500,
+      "unit": "mL",
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "DOC01"
+      ]
+    },
+    {
+      "key": "massa_corpo_g",
+      "value": 20.3,
+      "unit": "g",
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "DOC01"
+      ],
+      "observation": "Massa de projeto, não necessariamente massa medida de uma embalagem final."
+    },
+    {
+      "key": "material_tampa",
+      "value": null,
+      "unit": null,
+      "evidence_status": "AUSENTE",
+      "applicability": "DESCONHECIDA",
+      "evidence_ids": [],
+      "observation": "A ficha do corpo não identifica a tampa."
+    }
+  ],
+  "components": [
+    {
+      "id": "C01",
+      "kind": "corpo",
+      "presence": "SIM"
+    },
+    {
+      "id": "C02",
+      "kind": "tampa",
+      "presence": "DESCONHECIDA"
+    },
+    {
+      "id": "C03",
+      "kind": "rotulo",
+      "presence": "DESCONHECIDA"
+    },
+    {
+      "id": "C04",
+      "kind": "sleeve",
+      "presence": "DESCONHECIDA"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC01",
+      "filename": "500ml-Drinks-Clear-PET-Bottle_PET00.500MLCLROPBSIC.pdf",
+      "source_type": "url_oficial",
+      "url": "https://www.patrico.co.uk/app/uploads/2025/12/500ml-Drinks-Clear-PET-Bottle_PET00.500MLCLROPBSIC.pdf",
+      "version": "ficha-publica",
+      "notes": "Fonte do piloto v0.3.3; consultar ficha original para localização de evidências."
+    }
+  ]
+}
