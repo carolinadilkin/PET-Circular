@@ -1,7 +1,7 @@
-"""PET Circular — Interface Streamlit do motor determinístico demonstrativo.
+"""PET Circular — Streamlit com extração opcional, revisão humana e motor v0.1.
 
 Rodar: streamlit run app.py
-Sem IA, classificação global ou certificação automática.
+Sem classificação global nem certificação automática.
 """
 from __future__ import annotations
 
@@ -13,6 +13,8 @@ import pandas as pd
 import streamlit as st
 
 import storage
+from document_ai import measurements_pending
+from ui_document_ai import render_document_ai
 from pet_circular.engine import assess, validate
 from ui_helpers import (
     APPLICABILITY, EVIDENCE, KIND_LABELS, KINDS, PRESENCE, STATUSES,
@@ -35,7 +37,7 @@ FIELDS=fields_catalog()
 RULES=rule_catalog()
 SOURCES=source_catalog()
 MATRIX_VERSION='0.3.3'
-PAGES=['Visão geral','Produto','Componentes','Dados técnicos','Evidências','Avaliação']
+PAGES=['Visão geral','Produto','Componentes','Dados técnicos','Evidências','IA · Documentos','Avaliação']
 
 if 'case' not in st.session_state:st.session_state.case=example()
 if 'assessment' not in st.session_state:st.session_state.assessment=None
@@ -44,9 +46,10 @@ if 'form_epoch' not in st.session_state:st.session_state.form_epoch=0
 if 'last_message' not in st.session_state:st.session_state.last_message=None
 
 
-def commit(case,notice='Informações atualizadas.'):
+def commit(case,notice='Informações atualizadas.',clear_extraction=True):
     validate(case)
     st.session_state.case=case
+    if clear_extraction:st.session_state.pop('doc_ai_review',None)
     st.session_state.assessment=None
     st.session_state.assessment_hash=None
     st.session_state.form_epoch+=1
@@ -56,6 +59,7 @@ def commit(case,notice='Informações atualizadas.'):
 
 def reset(case,message):
     validate(case)
+    st.session_state.pop('doc_ai_review',None)
     st.session_state.case=case
     st.session_state.assessment=None
     st.session_state.assessment_hash=None
@@ -85,7 +89,7 @@ def fact_by_key(key):
 with st.sidebar:
     st.markdown('<div class="site-kicker">PET CIRCULAR</div>',unsafe_allow_html=True)
     st.title('Ecodesign Studio')
-    st.caption('Prova de conceito · matriz v0.3.3 · motor v0.1')
+    st.caption('Prova de conceito · matriz v0.3.3 · motor v0.1 · extração IA opcional')
     st.divider()
     page=st.radio('Navegação',PAGES, key='navigation')
     st.divider()
@@ -113,6 +117,7 @@ with st.sidebar:
             if st.button('Abrir snapshot',use_container_width=True,key='open_snapshot'):
                 product,result=storage.load(choices[saved_label])
                 st.session_state.case=product
+                st.session_state.pop('doc_ai_review',None)
                 st.session_state.assessment=result
                 st.session_state.assessment_hash=fingerprint(product) if result else None
                 st.session_state.form_epoch+=1
@@ -147,15 +152,15 @@ if page=='Visão geral':
     c3.metric('Componentes conhecidos',sum(c['presence']!='DESCONHECIDA' for c in case['components']))
     c4.metric('Regras avaliadas',len(ready['results']) if ready else 0)
     st.markdown('#### Caminho de avaliação')
-    st.markdown('**1. Produto** → **2. Componentes** → **3. Dados técnicos** → **4. Evidências** → **5. Avaliação**')
+    st.markdown('**1. Produto** → **2. Componentes** → **3. Dados técnicos** → **4. Evidências / IA** → **5. Revisão humana** → **6. Avaliação**')
     st.write('O app solicita fatos, separa informações ainda declaradas das confirmadas, aplica o motor de 15 regras e apresenta justificativas, lacunas e recomendações.')
     a,b=st.columns(2)
     with a:
         st.markdown('**O que está implementado**')
-        st.markdown('- Edição do envelope de produto e da presença de componentes.\n- Registro de fatos com unidade, estado e evidências.\n- Avaliação individual das 15 regras.\n- Exportação JSON e histórico SQLite local.')
+        st.markdown('- Edição do envelope de produto e da presença de componentes.\n- Registro de fatos com unidade, estado e evidências.\n- Avaliação individual das 15 regras.\n- Exportação JSON e histórico SQLite local.\n- Extração local de PDFs e IA opcional com revisão humana obrigatória.')
     with b:
         st.markdown('**O que ainda não está implementado**')
-        st.markdown('- Extração automática de arquivos por IA.\n- Balanço gravimétrico integral no Python.\n- Homologação de cobertura PET-04 e compactação PET-16.\n- Classe global e certificação.')
+        st.markdown('- OCR de PDFs escaneados e armazenamento seguro de originais.\n- Balanço gravimétrico integral no Python.\n- Homologação de cobertura PET-04 e compactação PET-16.\n- Classe global e certificação.')
     if ready:
         st.divider()
         st.markdown('#### Última avaliação')
@@ -334,6 +339,9 @@ elif page=='Evidências':
             except ValueError as ex:error_message(ex)
     else:st.info('Nenhum documento cadastrado.')
 
+elif page=='IA · Documentos':
+    render_document_ai(case,commit)
+
 elif page=='Avaliação':
     st.subheader('Avaliação técnico-científica')
     st.write('Execute o motor determinístico sobre o envelope atual. O relatório mostra a classificação **por critério**, não a certificação global da embalagem.')
@@ -353,11 +361,16 @@ elif page=='Avaliação':
         st.info('Execute a avaliação para ver os resultados. Se os dados forem alterados, a avaliação anterior será invalidada.')
     else:
         counts=Counter(r['status'] for r in result['results'])
-        c1,c2,c3,c4=st.columns(4)
+        c1,c2,c3,c4,c5=st.columns(5)
         c1.metric('Compatíveis',counts['COMPATIVEL'])
         c2.metric('Não compatíveis',counts['NAO_COMPATIVEL'])
         c3.metric('Inconclusivos',counts['INCONCLUSIVO'])
-        c4.metric('Ensaios pendentes',len(result['summary']['trials_pending']))
+        c4.metric('Ensaios requeridos',len(result['summary']['trials_pending']))
+        med=measurements_pending(result)
+        c5.metric('Medições pendentes',len(med))
+        if med:
+            st.caption('Medições/protocolos citados como faltantes (não são ensaios formalmente requisitados):')
+            st.dataframe(pd.DataFrame(med),hide_index=True,use_container_width=True)
         if result['scope']=='FORA':st.error('Fora do recorte inicial: não equivale a embalagem não reciclável.')
         elif result['scope']=='INDETERMINADO':st.warning('Escopo não confirmado. Informe material, transparência e cor do corpo.')
         else:st.success('Corpo do produto dentro do recorte PET transparente — demais critérios avaliados separadamente.')
@@ -406,4 +419,4 @@ elif page=='Avaliação':
                            file_name=f"pet_circular_{case['product_id']}_regras.csv",mime='text/csv',key='download_csv')
 
 st.divider()
-st.caption('PET Circular · PoC de pesquisa · 15 critérios técnicos individuais · Não utilizar como certificação oficial.')
+st.caption('PET Circular · PoC de pesquisa · extração sujeita a revisão humana · 15 critérios técnicos · Não utilizar como certificação oficial.')

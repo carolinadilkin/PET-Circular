@@ -1,5 +1,12 @@
 # Registro de versões
 
+## MVP v0.2 — documentos e revisão humana
+- Adiciona leitura de PDFs textuais e candidatos de dados com evidência por página.
+- Inclui extração local sem chave de API e adaptador opcional para OpenAI.
+- Protege dados confirmados: exigência de revisão humana antes de aplicar regras.
+- Corrige separação entre ensaios formalmente exigidos e medições pendentes.
+- Inclui documento sintético de teste e testes de extração / proveniência.
+
 ## MVP v0.1 — interface e motor técnico
 - Motor demonstrativo de 15 regras individuais da matriz PET Circular v0.3.3.
 - Aplicativo Streamlit com cadastro, componentes, evidências, avaliação e exportações.

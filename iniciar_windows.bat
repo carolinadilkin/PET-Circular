@@ -13,7 +13,7 @@ if not exist ".venv\Scripts\python.exe" (
   if errorlevel 1 goto ERRO
 )
 set "PY=.venv\Scripts\python.exe"
-"%PY%" -c "import streamlit,jsonschema,pandas" >nul 2>&1
+"%PY%" -c "import streamlit,jsonschema,pandas,pypdf,openai" >nul 2>&1
 if errorlevel 1 (
   echo Instalando dependencias: requer acesso a internet...
   "%PY%" -m pip install -r requirements.txt

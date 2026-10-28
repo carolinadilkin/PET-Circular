@@ -28,7 +28,7 @@ class StStub(types.ModuleType):
     def __getattr__(self,name):
         if name in {'form','expander','spinner'}:return lambda *a,**kw:UIObject()
         if name=='columns':return lambda count,*a,**kw:[UIObject() for _ in range(count if isinstance(count,int) else len(count))]
-        if name=='radio':return lambda *a,**kw:self.nav
+        if name=='radio':return lambda label,opts,*a,**kw:self.nav if label=='Navegação' else list(opts)[0]
         if name=='selectbox':
             return lambda label,opts,*a,**kw:list(opts)[kw.get('index',0)]
         if name=='multiselect':return lambda *a,**kw:kw.get('default',[]) or []
@@ -47,7 +47,7 @@ class StStub(types.ModuleType):
 
 class TestSmoke(unittest.TestCase):
     def test_all_screens_render_without_python_errors(self):
-        for nav in ['Visão geral','Produto','Componentes','Dados técnicos','Evidências','Avaliação']:
+        for nav in ['Visão geral','Produto','Componentes','Dados técnicos','Evidências','IA · Documentos','Avaliação']:
             with self.subTest(nav=nav):
                 st=StStub(nav)
                 old=sys.modules.get('streamlit')
