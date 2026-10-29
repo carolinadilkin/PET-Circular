@@ -47,7 +47,7 @@ class StStub(types.ModuleType):
 
 class TestSmoke(unittest.TestCase):
     def test_all_screens_render_without_python_errors(self):
-        for nav in ['Visão geral','Produto','Componentes','Dados técnicos','Evidências','IA · Documentos','Avaliação']:
+        for nav in ['Visão geral','Produto','Componentes','Dados técnicos','Evidências','IA · Documentos','Avaliação','Assistente de ecodesign']:
             with self.subTest(nav=nav):
                 st=StStub(nav)
                 old=sys.modules.get('streamlit')
@@ -57,6 +57,25 @@ class TestSmoke(unittest.TestCase):
                     if old is None:sys.modules.pop('streamlit',None)
                     else:sys.modules['streamlit']=old
                 self.assertIn('case',st.session_state)
+
+    def test_json_upload_button_replaces_blank_case(self):
+        """Reproduz o clique Importar usado no Teste B, sem Streamlit real."""
+        from types import SimpleNamespace
+        fixture = (ROOT/'examples'/'teste_rotulo_pvc_input.json').read_bytes()
+        st = StStub('Visão geral', actions={'import_case_button'})
+        st.file_uploader = lambda *a,**kw: SimpleNamespace(getvalue=lambda: fixture)
+        old = sys.modules.get('streamlit')
+        sys.modules['streamlit'] = st
+        try:
+            runpy.run_path(str(ROOT/'app.py'))
+        finally:
+            if old is None: sys.modules.pop('streamlit',None)
+            else: sys.modules['streamlit']=old
+        self.assertEqual(st.session_state.case['product_id'],'SYN-PET-PVC-LABEL-001')
+        self.assertEqual(len(st.session_state.case['facts']),6)
+        from pet_circular.engine import assess
+        report=assess(st.session_state.case)
+        self.assertIn('PET-05',report['summary']['incompatibilities_confirmed'])
 
     def test_evaluation_action_calls_original_motor(self):
         st=StStub('Avaliação',actions={'run_assessment'})
