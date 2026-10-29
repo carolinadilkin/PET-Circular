@@ -112,8 +112,15 @@ def offline_answer(query: str, report: dict) -> dict:
             lines.append('**Dados a confirmar:** ' + ', '.join(rule['faltantes']) + '.')
         if rule['recomendacoes_ativadas']:
             lines.append('**Recomendação ativada:** ' + ' '.join(rule['recomendacoes_ativadas']))
-        else:
-            lines.append('**Orientação da matriz:** ' + rule['recomendacao_matriz'])
+        # A recomendação curta do motor não substitui a orientação científica completa.
+        # Mostrá-las juntas impede respostas genéricas quando há incompatibilidade.
+        lines.append('**Orientação da matriz:** ' + rule['recomendacao_matriz'])
+        if rule['id']=='PET-05' and rule['resultado_produto']=='NAO_COMPATIVEL':
+            lines.append('**Motivo técnico:** um subcritério incompatível impede considerar o rótulo integralmente compatível; confirmar densidade da estrutura final, fixação/desprendimento e interferência óptica continua necessário para documentar os demais aspectos.')
+        if rule['evidencias']:
+            lines.append('**Evidências vinculadas ao critério:** ' + ', '.join(rule['evidencias']) + '.')
+        if rule['referencias']:
+            lines.append('**Fontes da matriz:** ' + ', '.join(rule['referencias']) + ' (consulte os links abaixo da resposta).')
         lines.append('**Limitação:** ' + rule['ressalva'])
     lines.append('Esta explicação usa as regras versionadas e o resultado atual; não substitui ensaio ou certificação.')
     return {'mode':'LOCAL','answer':'\n\n'.join(lines), 'rule_ids':ids,

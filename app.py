@@ -102,8 +102,18 @@ with st.sidebar:
     with st.expander('Importar envelope JSON'):
         uploaded_json=st.file_uploader('Arquivo JSON',type=['json'],key='case_upload')
         if st.button('Importar',disabled=uploaded_json is None,key='import_case_button'):
-            try:reset(import_case(uploaded_json.getvalue()),'Envelope JSON importado e validado.')
+            try:
+                imported = import_case(uploaded_json.getvalue())
+                reset(imported, (
+                    f"Importação confirmada: {imported['product_name']} "
+                    f"[ID: {imported['product_id']}] · "
+                    f"{len(imported['facts'])} fatos, {len(imported['components'])} componentes."
+                ))
             except (ValueError,UnicodeError,json.JSONDecodeError) as ex:error_message(ex)
+    active = st.session_state.case
+    st.caption(f"Caso ativo: `{active['product_id']}` · {len(active['facts'])} fatos · {len(active['components'])} componentes")
+    if not active['facts']:
+        st.warning('Nenhum fato técnico registrado neste produto. Verifique se a importação JSON foi concluída antes de avaliar.')
     st.download_button('Exportar dados do produto (.json)',
         data=json.dumps(st.session_state.case,indent=2,ensure_ascii=False).encode('utf-8'),
         file_name=f"pet_circular_{st.session_state.case['product_id']}_input.json",
@@ -140,6 +150,7 @@ if st.session_state.last_message:
 
 st.markdown('<div class="site-kicker">PROTÓTIPO FUNCIONAL • AVALIAÇÃO TÉCNICA ASSISTIDA</div>',unsafe_allow_html=True)
 st.title('PET Circular')
+st.caption(f"Produto ativo: **{case['product_name']}** · ID `{case['product_id']}` · **{len(case['facts'])}** fatos técnicos")
 st.caption('Compatibilidade de design para garrafas PET transparentes incolores ou azul-claras.')
 st.info('Este protótipo não emite classe global de reciclabilidade, laudo nem certificação RecyClass. Informações declaradas ou propostas não são tratadas como confirmadas.')
 

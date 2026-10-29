@@ -1,4 +1,4 @@
-# PET Circular — App com extração documental e revisão humana (MVP v0.2)
+# PET Circular — MVP v0.3.1 com assistente de ecodesign
 
 **Objetivo:** avaliar aspectos de design de garrafas PET transparentes incolores ou azul-claras com base nas **15 regras individuais da matriz v0.3.3**, usando o motor determinístico v0.1. Esta versão acrescenta a leitura de PDFs, a extração de candidatos de dados técnicos, a proveniência por página e a confirmação humana antes de usar qualquer valor extraído na avaliação.
 
@@ -94,3 +94,7 @@ Na barra lateral, abra **Assistente de ecodesign**. O modo **Local — rastreáv
 **Testes:** `python -m unittest discover -s tests -v` (70 testes offline).
 
 **Próximas entregas:** teste visual de extração e revisão no Windows, validação com documento real completo e autorizado, OCR opcional, avaliação de precisão da IA e melhorias de usabilidade. O agente conversacional e a plataforma multiempresa permanecem fora deste MVP.
+
+## Teste de regressão PVC — v0.3.1
+
+Consulte `docs/TESTE_PVC_REGRESSAO.md` e importe `examples/teste_rotulo_pvc_input.json`. Confirme o ID ativo e a contagem de fatos antes de executar a avaliação.

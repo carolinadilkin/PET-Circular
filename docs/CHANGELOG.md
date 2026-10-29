@@ -1,3 +1,10 @@
+## v0.3.1 — 29/10/2026
+- Diagnóstico de regressão A/B com cenário PVC.
+- Identidade e contagem do caso ativo visíveis em todas as telas, com alerta quando nenhum fato foi registrado.
+- Confirmação explícita da importação (ID, nome, fatos, componentes).
+- Resposta local preserva simultaneamente recomendação curta ativada e orientação completa da matriz, incluindo alternativas técnicas de PET-05.
+- Fixture de importação sintética e testes de regressão.
+
 ## v0.3 — 28/10/2026
 - Assistente de ecodesign em página Streamlit, vinculado ao produto e ao resultado das 15 regras.
 - Modo local determinístico e modo OpenAI API opcional mediante consentimento.
