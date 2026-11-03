@@ -16,6 +16,7 @@ import storage
 from document_ai import measurements_pending
 from ui_document_ai import render_document_ai
 from ui_assistant import render_assistant
+from ui_v04 import home as v04_home, guided as v04_guided, comparison as v04_comparison, projects as v04_projects, known_components as v04_known
 from pet_circular.engine import assess, validate
 from ui_helpers import (
     APPLICABILITY, EVIDENCE, KIND_LABELS, KINDS, PRESENCE, STATUSES,
@@ -32,23 +33,31 @@ st.markdown('''<style>
 [data-testid="stSidebar"]{border-right:1px solid #e2ebe6}
 .small-caption{color:#587468;font-size:0.87rem}
 .site-kicker{font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:0.75rem;color:#187763}
+.stButton button[kind=primary]{border-radius:10px;font-weight:650}
+[data-testid=stVerticalBlockBorderWrapper]{border-radius:14px}
+@media(max-width:700px){.block-container{padding-left:1rem;padding-right:1rem}.block-container h1{font-size:1.8rem}}
 </style>''',unsafe_allow_html=True)
 
 FIELDS=fields_catalog()
 RULES=rule_catalog()
 SOURCES=source_catalog()
 MATRIX_VERSION='0.3.3'
-PAGES=['Visão geral','Produto','Componentes','Dados técnicos','Evidências','IA · Documentos','Avaliação','Assistente de ecodesign']
+PAGES=['Início','Avaliação','Comparação','Projetos','Avançado']
+ADVANCED_PAGES=['Visão geral','Produto','Componentes','Dados técnicos','Evidências','IA · Documentos','Avaliação técnica','Assistente de ecodesign']
 
-if 'case' not in st.session_state:st.session_state.case=example()
+if 'case' not in st.session_state:st.session_state.case=fresh()
 if 'assessment' not in st.session_state:st.session_state.assessment=None
 if 'assessment_hash' not in st.session_state:st.session_state.assessment_hash=None
 if 'form_epoch' not in st.session_state:st.session_state.form_epoch=0
 if 'last_message' not in st.session_state:st.session_state.last_message=None
+if 'saved_hash_v04' not in st.session_state:st.session_state.saved_hash_v04=None
+if 'guide_step_v04' not in st.session_state:st.session_state.guide_step_v04=0
+if 'assessment_stale_v04' not in st.session_state:st.session_state.assessment_stale_v04=False
 
 
 def commit(case,notice='Informações atualizadas.',clear_extraction=True):
     validate(case)
+    st.session_state.assessment_stale_v04=st.session_state.get('assessment') is not None
     st.session_state.case=case
     if clear_extraction:st.session_state.pop('doc_ai_review',None)
     st.session_state.assessment=None
@@ -60,6 +69,8 @@ def commit(case,notice='Informações atualizadas.',clear_extraction=True):
 
 def reset(case,message):
     validate(case)
+    st.session_state.saved_hash_v04=None
+    st.session_state.assessment_stale_v04=False
     st.session_state.pop('doc_ai_review',None)
     st.session_state.case=case
     st.session_state.assessment=None
@@ -86,75 +97,70 @@ def fact_by_key(key):
     return None
 
 
-# Barra lateral — navegação, importação, snapshots e exportação
+# Navegação principal por tarefas; ferramentas históricas permanecem em Avançado.
+if st.session_state.get('pending_nav_v04'):
+    st.session_state.navigation = st.session_state.pop('pending_nav_v04')
+if 'navigation' not in st.session_state:
+    st.session_state.navigation = 'Início'
+
 with st.sidebar:
     st.markdown('<div class="site-kicker">PET CIRCULAR</div>',unsafe_allow_html=True)
     st.title('Ecodesign Studio')
-    st.caption('Prova de conceito · matriz v0.3.3 · motor v0.1 · extração IA opcional')
+    st.caption('Interface guiada v0.4 · matriz técnica v0.3.3')
     st.divider()
-    page=st.radio('Navegação',PAGES, key='navigation')
+    page = st.radio('Navegação',PAGES,key='navigation')
+    if page == 'Avançado':
+        page = st.selectbox('Ferramenta técnica',ADVANCED_PAGES,key='advanced_page_v04')
+    if page == 'Avaliação':
+        page = 'Avaliação guiada'
     st.divider()
-    st.markdown('**Casos de avaliação**')
-    if st.button('Carregar piloto Patrico',use_container_width=True,key='load_patrico'):
-        reset(example(),'Piloto documental Patrico restaurado.')
-    if st.button('Criar produto novo',use_container_width=True,key='new_case'):
-        reset(fresh(),'Novo produto criado.')
-    with st.expander('Importar envelope JSON'):
-        uploaded_json=st.file_uploader('Arquivo JSON',type=['json'],key='case_upload')
-        if st.button('Importar',disabled=uploaded_json is None,key='import_case_button'):
-            try:
-                imported = import_case(uploaded_json.getvalue())
-                reset(imported, (
-                    f"Importação confirmada: {imported['product_name']} "
-                    f"[ID: {imported['product_id']}] · "
-                    f"{len(imported['facts'])} fatos, {len(imported['components'])} componentes."
-                ))
-            except (ValueError,UnicodeError,json.JSONDecodeError) as ex:error_message(ex)
-    active = st.session_state.case
-    st.caption(f"Caso ativo: `{active['product_id']}` · {len(active['facts'])} fatos · {len(active['components'])} componentes")
-    if not active['facts']:
-        st.warning('Nenhum fato técnico registrado neste produto. Verifique se a importação JSON foi concluída antes de avaliar.')
-    st.download_button('Exportar dados do produto (.json)',
-        data=json.dumps(st.session_state.case,indent=2,ensure_ascii=False).encode('utf-8'),
-        file_name=f"pet_circular_{st.session_state.case['product_id']}_input.json",
-        mime='application/json',use_container_width=True,key='download_input')
-    st.divider()
-    st.markdown('**Histórico local**')
-    try:
-        saved=storage.latest()
-        if saved:
-            choices={f"#{x['id']} · {x['product_name']} ({x['design_version']})":x['id'] for x in saved}
-            saved_label=st.selectbox('Casos salvos',list(choices),key='saved_select')
-            if st.button('Abrir snapshot',use_container_width=True,key='open_snapshot'):
-                product,result=storage.load(choices[saved_label])
-                st.session_state.case=product
-                st.session_state.pop('doc_ai_review',None)
-                st.session_state.assessment=result
-                st.session_state.assessment_hash=fingerprint(product) if result else None
-                st.session_state.form_epoch+=1
-                st.session_state.last_message='Snapshot recuperado.'
-                st.rerun()
-        else:st.caption('Nenhum snapshot salvo.')
-        if st.button('Salvar snapshot',use_container_width=True,key='save_snapshot'):
-            snapshot_id=storage.save(st.session_state.case,current_result())
-            st.success(f'Snapshot #{snapshot_id} salvo no SQLite local.')
-    except (OSError,ValueError,Exception) as ex:
-        # Problemas de disco não devem impedir a avaliação em memória.
-        st.warning(f'Histórico local indisponível: {ex}')
-    st.caption('Dados salvos apenas no computador/servidor que executa o app. PDFs carregados não são arquivados.')
+    case_for_sidebar=st.session_state.case
+    st.markdown('**Em uso**')
+    st.caption(f"{case_for_sidebar['product_name']} · `{case_for_sidebar['product_id']}`")
+    st.caption(f"{len(case_for_sidebar['facts'])} informações · presença definida em {v04_known(case_for_sidebar)}/11 componentes")
+    if st.session_state.get('saved_hash_v04') != fingerprint(case_for_sidebar):
+        st.caption('Há trabalho não salvo neste computador/servidor.')
+    st.caption('Sem classe global ou certificação de reciclabilidade.')
+    if page not in ('Início','Avaliação guiada','Comparação','Projetos'):
+        st.divider()
+        st.caption('Ferramentas técnicas de revisão. Para criar, importar ou recuperar outra embalagem, use Projetos: a troca exige confirmação.')
+
+
+def replace_case_v04(new_case,result=None,message='Projeto carregado.',saved=False):
+    validate(new_case)
+    st.session_state.case=new_case
+    st.session_state.pop('doc_ai_review',None)
+    st.session_state.assessment=result
+    st.session_state.assessment_hash=fingerprint(new_case) if result else None
+    st.session_state.assessment_stale_v04=False
+    st.session_state.saved_hash_v04=fingerprint(new_case) if saved else None
+    st.session_state.form_epoch+=1
+    st.session_state.last_message=message
+    st.session_state.pop('assistant_messages',None)
+    # A navegação de destino executa o único rerun após a substituição.
 
 case=st.session_state.case
 if st.session_state.last_message:
     st.success(st.session_state.last_message)
     st.session_state.last_message=None
 
-st.markdown('<div class="site-kicker">PROTÓTIPO FUNCIONAL • AVALIAÇÃO TÉCNICA ASSISTIDA</div>',unsafe_allow_html=True)
-st.title('PET Circular')
-st.caption(f"Produto ativo: **{case['product_name']}** · ID `{case['product_id']}` · **{len(case['facts'])}** fatos técnicos")
-st.caption('Compatibilidade de design para garrafas PET transparentes incolores ou azul-claras.')
-st.info('Este protótipo não emite classe global de reciclabilidade, laudo nem certificação RecyClass. Informações declaradas ou propostas não são tratadas como confirmadas.')
+if page not in ('Início','Avaliação guiada','Comparação','Projetos'):
+    st.markdown('<div class="site-kicker">PROTÓTIPO FUNCIONAL • AVALIAÇÃO TÉCNICA ASSISTIDA</div>',unsafe_allow_html=True)
+if page not in ('Início','Avaliação guiada','Comparação','Projetos'):
+    st.title('PET Circular')
+    st.caption(f"Produto ativo: **{case['product_name']}** · ID `{case['product_id']}` · **{len(case['facts'])}** fatos técnicos")
+    st.caption('Compatibilidade de design para garrafas PET transparentes incolores ou azul-claras.')
+    st.info('Este protótipo não emite classe global de reciclabilidade, laudo nem certificação RecyClass. Informações declaradas ou propostas não são tratadas como confirmadas.')
 
-if page=='Visão geral':
+if page=='Início':
+    v04_home(case,current_result())
+elif page=='Avaliação guiada':
+    v04_guided(case,commit,current_result())
+elif page=='Comparação':
+    v04_comparison()
+elif page=='Projetos':
+    v04_projects(case,current_result(),replace_case_v04,st.session_state.get('saved_hash_v04')!=fingerprint(case))
+elif page=='Visão geral':
     st.subheader('Visão geral do projeto')
     st.write(f"**{case['product_name']}** · Código `{case['product_id']}` · Versão de design `{case.get('design_version','—')}`")
     ready=current_result()
@@ -357,7 +363,7 @@ elif page=='IA · Documentos':
 elif page=='Assistente de ecodesign':
     render_assistant(case, current_result())
 
-elif page=='Avaliação':
+elif page=='Avaliação técnica':
     st.subheader('Avaliação técnico-científica')
     st.write('Execute o motor determinístico sobre o envelope atual. O relatório mostra a classificação **por critério**, não a certificação global da embalagem.')
     st.caption('A presença ou ausência declarada dos componentes ainda não possui verificação documental automática. Confirme esses dados com o responsável técnico.')

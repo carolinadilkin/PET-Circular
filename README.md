@@ -1,17 +1,18 @@
-# PET Circular — MVP v0.3.1 com assistente de ecodesign
+# PET Circular — Guided Ecodesign Studio v0.4 (prévia funcional)
 
-**Objetivo:** avaliar aspectos de design de garrafas PET transparentes incolores ou azul-claras com base nas **15 regras individuais da matriz v0.3.3**, usando o motor determinístico v0.1. Esta versão acrescenta a leitura de PDFs, a extração de candidatos de dados técnicos, a proveniência por página e a confirmação humana antes de usar qualquer valor extraído na avaliação.
+Aplicativo Streamlit orientado a tarefas para apoiar avaliações de **design de garrafas PET transparentes incolores ou azul-claras**, com 15 regras individuais da **matriz técnica v0.3.3** e motor determinístico **v0.1.0**.
 
-> **Não emite classe global nem certificação RecyClass.** Fichas técnicas do corpo da garrafa não comprovam as propriedades da embalagem final. Os limites das PET-04 e PET-16 e a integração da composição gravimétrica permanecem pendentes de metodologia ou implementação. A cobertura científica do motor não foi ampliada nesta versão.
+> **Não emite classe global, laudo ou certificação de reciclabilidade.** Nenhuma recomendação de IA substitui documentação técnica, revisão humana ou ensaio necessário. Casos demonstrativos não representam evidência de produtos reais.
 
-## Execução no Windows
+## Executar no Windows
 
-1. Instale Python 3.11+ pelo site https://www.python.org/downloads/ (caso ainda não tenha).
-2. Extraia o ZIP **inteiro** para uma pasta nova, sem misturar com o aplicativo anterior.
-3. Abra a pasta `PET_Circular_App_IA_v02` e dê duplo clique em **`iniciar_windows.bat`**. O arquivo instala as dependências necessárias na primeira execução, com internet.
-4. Acesse `http://localhost:8501` no navegador se não abrir automaticamente.
+1. Instale [Python 3.11+](https://www.python.org/downloads/) com o Python Launcher (`py`).
+2. Extraia o **ZIP inteiro** em uma pasta nova, sem misturá-lo com a v0.3.1.
+3. Entre na pasta `PET_Circular_App_v04` e execute **`iniciar_windows.bat`**.
+4. Na primeira execução, com internet, as dependências Python serão instaladas. O aplicativo abrirá em `http://127.0.0.1:8501`.
+5. Para interromper, feche o terminal ou pressione `Ctrl+C`.
 
-Outra forma, pelo PowerShell dentro da pasta do aplicativo:
+Alternativa no terminal:
 
 ```powershell
 py -m venv .venv
@@ -19,82 +20,81 @@ py -m venv .venv
 .\.venv\Scripts\python.exe -m streamlit run app.py
 ```
 
-Feche o aplicativo com `Ctrl+C` no terminal. Se uma instalação anterior for usada, confirme que o `iniciar_windows.bat` está dentro da **nova** pasta, pois as dependências `pypdf` e `openai` são novas.
+## Navegação principal
 
-## Teste orientado (sem chave nem custos de API)
+- **Início:** escolha entre avaliar, comparar ou continuar um projeto.
+- **Avaliação:** etapas flexíveis `Embalagem → Informações → Revisar → Resultados`.
+  - Na etapa **Embalagem**, identifique produto/versão, material do corpo e presença de componentes. `Ainda não sei` não equivale a `Ausente`.
+  - Na etapa **Informações**, carregue uma ficha PDF (extração local padrão; API OpenAI opcional com chave e consentimento) ou preencha manualmente.
+  - Na etapa **Revisar**, confira os estados `DECLARADO`/`CONFIRMADO`, evidência e revisor. A confirmação exige ação e identificação humana; upload não confirma.
+  - Na etapa **Resultados**, clique em **Avaliar com os dados disponíveis**, examine incompatibilidades e pendências, abra fontes, exporte o resultado e pergunte ao assistente local.
+- **Comparação:** selecione dois relatórios de avaliação JSON já gerados, duas avaliações salvas ou uma demonstração A/B sintética. Quando os IDs diferirem, confirme a relação entre os designs. A comparação bloqueia versões diferentes da matriz/motor e não calcula classe global.
+- **Projetos:** salve snapshots em SQLite local, exporte JSON de entrada, importe novo projeto com prévia/consentimento ou abra versões salvas. **Não há salvamento automático.**
+- **Avançado:** conserva as telas técnicas anteriores para auditoria e edição detalhada, sem atalhos de substituição do projeto.
 
-1. Clique em **Criar produto novo**; não utilize dados fictícios como evidência do piloto Patrico.
-2. Acesse **IA · Documentos** e carregue `examples/ficha_sintetica_teste.pdf` (esse arquivo é **sintético**, elaborado exclusivamente para teste de software, não uma especificação comercial).
-3. Selecione **Local — padrões explícitos**; clique em **Ler PDF e propor dados**.
-4. Confira o documento registrado e os **seis candidatos** apresentados com transcrição literal e número de página.
-5. Selecione os candidatos que deseja confirmar, digite a identificação do revisor, marque a confirmação explícita e clique em **Confirmar selecionados e atualizar o produto**.
-6. Em **Dados técnicos**, confira que os campos aceitos estão `CONFIRMADO` e estão associados ao ID do PDF, com trecho e página registrados em `observation`.
-7. Em **Componentes**, confirme separadamente a presença/ausência de acessórios; a inferência de presença a partir de material NÃO é automática.
-8. Em **Avaliação**, execute novamente as 15 regras e exporte o JSON. O sistema manterá **classe global: NÃO EMITIDA**.
+## Teste rápido recomendado
 
-Opcionalmente, carregue o piloto Patrico para comparar a avaliação documental existente. **Não utilize** a ficha sintética como evidência da Patrico.
+### Percurso 1 — comparação A/B
 
-## Extração usando IA OpenAI (opcional)
+1. Acesse **Comparação**.
+2. Em *Como deseja selecionar*, escolha **Experimentar dados demonstrativos**. Confirme a relação entre os relatórios A/B.
+3. Compare as transições de **PET-09** e **PET-18** (`NAO_COMPATIVEL → COMPATIVEL`), **PET-05** (`NAO_COMPATIVEL → INCONCLUSIVO`) e pendências **PET-04**, **PET-16**, **PET-17**.
+4. Exporte o resultado da comparação. Nenhuma embalagem recebe aprovação global.
 
-Para experimentar o modo por modelo de linguagem:
+### Percurso 2 — importação e avaliação
 
-1. Tenha uma chave válida de **API OpenAI** com faturamento/habilitação apropriados. Uma assinatura do ChatGPT não substitui credenciais de API.
-2. Abra **IA · Documentos** → **IA — OpenAI API**.
-3. Cole a chave no campo protegido da sessão ou defina `OPENAI_API_KEY` como variável de ambiente antes de executar o aplicativo.
-4. Escolha o modelo disponível em sua conta (valor inicial `gpt-4.1-mini`). Marque o consentimento **somente se tiver autorização** para enviar texto do documento ao provedor externo.
-5. Clique em **Ler PDF e propor dados**, depois revise individualmente as citações antes de aceitar.
+1. Vá a **Projetos → Importar um projeto existente**.
+2. Selecione `examples/integrated/Design_A_Entrada.json`.
+3. Confira a prévia do produto atual e o produto que será importado. Marque a confirmação e clique em **Substituir produto ativo**.
+4. Em **Avaliação → 4. Resultados**, clique em **Avaliar com os dados disponíveis**.
+5. Devem aparecer **3 incompatibilidades confirmadas** (PET-05, PET-09, PET-18). Exporte o relatório JSON.
+6. Em **Projetos**, salve o snapshot para retomar/comparar no futuro.
+7. Repita com `Design_B_Entrada.json`: **0 incompatibilidades identificadas**, mas **PET-05 inconclusivo**. Salve e compare.
 
-A integração usa o endpoint **Responses API** com Structured Outputs e `store=False`. Somente texto extraído do PDF é enviado; não é feito upload do arquivo bruto nem envio de dados ao serviço sem o consentimento explícito. **A disponibilidade do modelo, custo e comportamento remoto não puderam ser verificados neste ambiente**. O modo local funciona sem essa integração. Evite testar com documentos sigilosos ou de terceiros sem autorização.
+### Percurso 3 — PDF com revisão humana
 
-## Segurança, limites e proveniência
+1. Crie um novo projeto em **Projetos**, confirme a substituição.
+2. Em **Avaliação → 1. Embalagem**, salve o cadastro e indique os componentes cuja presença conhece.
+3. Em **2. Informações → Enviar ficha técnica PDF**, carregue `examples/ficha_sintetica_teste.pdf` e use modo **Local**.
+4. Revise os trechos literais por página; marque cada valor correto, informe o revisor e confirme explicitamente.
+5. Na etapa **3. Revisar**, confira a proveniência e, então, execute a avaliação na etapa **4. Resultados**.
 
-- O PDF precisa conter texto pesquisável. PDFs escaneados exigem OCR, que **não faz parte deste incremento**. Limites: 12 MB, 35 páginas e até 48 mil caracteres enviados à extração.
-- O parser local é deliberadamente conservador e reconhece apenas algumas propriedades com rótulos explícitos. A IA tenta até 13 campos canônicos permitidos, mas **não pode inventar campos nem classificações**.
-- Propostas da IA são recusadas se apresentarem página inválida, citação não encontrada no texto extraído ou valor sem suporte textual detectável. Isso **não garante** que toda interpretação semântica da IA esteja correta; é necessária revisão humana.
-- Nenhum dado é importado como `CONFIRMADO` por simples upload. É necessário aceitar cada proposta e informar o revisor, que pode corrigir o valor se ele for sustentado pelo trecho citado.
-- Substituir um valor já confirmado exige autorização explícita por campo. A presença de tampa, rótulo, sleeve e outros componentes é tratada separadamente.
-- O PDF original e a chave API **não são gravados no SQLite**. Só são salvos metadados, hash, fatos confirmados, trechos citados e identificador do revisor; o usuário deve arquivar o PDF original.
-- O banco local `data/local.sqlite3` contém informações potencialmente confidenciais da embalagem após confirmação. Não publique o app na internet sem autenticação, isolamento de usuários e controles de segurança. Na execução remota o armazenamento fica no servidor.
-- Nenhuma resposta do modelo decide reciclabilidade diretamente: o motor Python, inalterado, avalia as regras individualmente.
-- O cartão **Ensaios requeridos** foi separado de **Medições pendentes**, eliminando a leitura equivocada do zero ensaio no piloto com a PET-16 inconclusiva.
+O extrator local é conservador: ele **não** reconhece todos os campos da matriz. PDF digitalizado sem texto pesquisável requer OCR, ainda não implementado. A presença dos componentes não é inferida automaticamente do documento.
 
-## Testes automatizados
+## Versões, armazenamento e privacidade
 
-```bash
-python -m unittest discover -s tests -v
-python -m pet_circular examples/patrico_input.json -o examples/patrico_result.json
+- Motor `0.1.0`, matriz `0.3.3`, interface `0.4` (prévia funcional).
+- SQLite fica no computador/servidor que executa o Streamlit; **não é uma conta multiusuário**.
+- PDF original e credencial de API não são guardados no banco; mantenha o arquivo original.
+- A API externa é opcional, com consentimento e chave própria. O modo local não necessita API.
+- Salvamento é explícito; exporte também o JSON de entrada. Abrir outro projeto substitui o estado na sessão somente após confirmação.
+- Alterar qualquer dado invalida o resultado ativo; é necessário reavaliar.
+- Nunca use dados sintéticos como evidências laboratoriais ou de fornecedor.
+
+## Testes e limites da implementação
+
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-Foram executados testes unitários offline de extração de PDF, verificação literal de citações, rejeição de campos inventados, proteção contra substituição de valor confirmado, revisão humana e motor de regras. A chamada à API foi testada com uma implementação simulada (*mock*), **não com credenciais reais**. O Streamlit não estava instalado no ambiente de desenvolvimento, então a interface visual precisa ser verificada no Windows.
+Foram executados **93 testes offline** neste incremento, incluindo regressões do motor, parser documental, assistente, comparação A/B, histórico SQLite e testes estruturais de navegação com *stub*. Não foi executado um teste visual do **Streamlit real** neste ambiente. A validação de acessibilidade WCAG, navegação por teclado e teste independente de usabilidade precisam ser realizados em navegador no Windows.
 
-## Estrutura
+## Estrutura principal
 
 ```text
-PET_Circular_App_IA_v02/
-  app.py                         Interface, navegador de regras e nova página IA · Documentos
-  ui_document_ai.py              Upload, propostas, revisão humana e consentimento
-  document_ai.py                 PDF, parser local, Responses API, validação de citações
-  ui_helpers.py                  Fatos, evidências e transformação para o motor
-  storage.py                     Snapshots locais SQLite
-  pet_circular/                 Motor v0.1 e regras da matriz científica v0.3.3
-  examples/
-    patrico_input.json           Piloto documental real (dados previamente registrados)
-    ficha_sintetica_teste.pdf     Arquivo FICTÍCIO exclusivamente para teste de extração
-  tests/                         Testes do motor, interface e integração de PDFs
-  iniciar_windows.bat            Inicialização no Windows
-  requirements.txt               Dependências
+PET_Circular_App_v04/
+  app.py                    Ponto de entrada: nova navegação + telas avançadas
+  ui_v04.py                 Fluxo guiado, resultados, projetos e comparação
+  comparison_v04.py         Algoritmo determinístico de transições A/B
+  ui_document_ai.py         Extração documental e revisão humana
+  ui_assistant.py           Assistente por regra e evidência
+  ecodesign_assistant.py    Respostas locais / adaptador API opcional
+  pet_circular/engine.py    Motor técnico original, sem alteração nas 15 regras
+  storage.py                Snapshots históricos SQLite
+  examples/integrated/      Cenários A/B inteiramente sintéticos
+  tests/                    Testes automatizados
+  docs/UX_V04_IMPLEMENTACAO.md
+  iniciar_windows.bat
 ```
 
-## Assistente de ecodesign — MVP v0.3 (prova de conceito)
-
-Na barra lateral, abra **Assistente de ecodesign**. O modo **Local — rastreável, sem API** responde com status do motor, campos faltantes, recomendações da matriz e links das referências das regras relacionadas. O modo **IA — OpenAI API** redige a explicação em linguagem natural, mediante chave e consentimento explícito; sua chamada envia somente a pergunta, os resultados relevantes e os trechos das regras (não os PDFs originais). A API não decide compatibilidade e sua resposta exige revisão.
-
-**Limitações:** identificação de regras por palavras-chave/IDs; a interpretação é limitada às 15 regras e ao estado corrente. O modo local não é IA generativa. A chamada externa foi verificada com mock, não com chave real. Dúvidas normativas exigem consulta humana à diretriz, e classe global não é emitida. Histórico da conversa é mantido somente na sessão Streamlit. Com os dados atuais do produto alterados, o diálogo é reiniciado.
-
-**Testes:** `python -m unittest discover -s tests -v` (70 testes offline).
-
-**Próximas entregas:** teste visual de extração e revisão no Windows, validação com documento real completo e autorizado, OCR opcional, avaliação de precisão da IA e melhorias de usabilidade. O agente conversacional e a plataforma multiempresa permanecem fora deste MVP.
-
-## Teste de regressão PVC — v0.3.1
-
-Consulte `docs/TESTE_PVC_REGRESSAO.md` e importe `examples/teste_rotulo_pvc_input.json`. Confirme o ID ativo e a contagem de fatos antes de executar a avaliação.
+A especificação de UX aprovada está registrada em `docs/UX_V04_ESPECIFICACAO_APROVADA.md`. O protótipo HTML inicial é apenas uma referência visual; o aplicativo que executa avaliações reais é **`app.py`**.

@@ -1,3 +1,12 @@
+## v0.4 — 03/11/2026 (prévia funcional de interface)
+- Navegação orientada a tarefas: Início, Avaliação, Comparação, Projetos e Avançado.
+- Fluxo guiado flexível: dados da embalagem, documentos ou preenchimento manual, revisão humana e resultados.
+- Resumo de resultados priorizando incompatibilidades e pendências, com fontes e assistente integrado.
+- Comparador A/B determinístico por regra, distinguindo `NAO_COMPATIVEL → COMPATIVEL` de `NAO_COMPATIVEL → INCONCLUSIVO`.
+- Histórico completo de snapshots e relatórios, com confirmação antes da substituição do projeto ativo.
+- Testes de regressão dos designs sintéticos A/B, de comparação e de proteção da importação; 93 testes offline aprovados.
+- Limitação: validação visual do Streamlit real e acessibilidade integral pendentes no Windows.
+
 ## v0.3.1 — 29/10/2026
 - Diagnóstico de regressão A/B com cenário PVC.
 - Identidade e contagem do caso ativo visíveis em todas as telas, com alerta quando nenhum fato foi registrado.
