@@ -1,12 +1,15 @@
-name: PET Circular - testes Python
+name: PET Circular - testes Python e Web
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - 'feature/**'
   push:
     branches:
       - main
       - 'development/**'
+      - 'feature/**'
   workflow_dispatch:
 
 permissions:
@@ -25,29 +28,26 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ['3.11', '3.12']
-
     steps:
       - name: Baixar codigo
         uses: actions/checkout@v7
         with:
           persist-credentials: false
-
       - name: Configurar Python
         uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
-          cache-dependency-path: requirements.txt
-
+          cache-dependency-path: |
+            requirements.txt
+            requirements-web.txt
       - name: Instalar dependencias
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
-
+          python -m pip install -r requirements.txt -r requirements-web.txt
       - name: Verificar sintaxe Python
-        run: python -m compileall -q app.py pet_circular document_ai.py ui_document_ai.py ui_helpers.py storage.py tests
-
-      - name: Testes automatizados (sem API externa)
+        run: python -m compileall -q server.py app.py pet_circular tests
+      - name: Testes offline e de API
         env:
           PYTHONDONTWRITEBYTECODE: '1'
           PYTHONUTF8: '1'
