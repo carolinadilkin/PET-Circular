@@ -336,7 +336,7 @@ def _rule_detail(r: dict, *, prefix: str = ''):
         st.markdown('**Dados a confirmar:** ' + '; '.join(pretty_field(x) for x in r['missing']) + '.')
         st.caption('Chaves técnicas: ' + ', '.join(r['missing']))
         editable = next((key for key in r['missing'] if key in FIELDS), None)
-        if editable and st.button('Informar um dado pendente desta regra', key=f'edit_rule_v04_{rid}'):
+        if editable and st.button('Informar um dado pendente desta regra', key=f'edit_rule_v04_{prefix}_{rid}'):
             st.session_state.v04_target_field = editable
             stage(1)
     st.markdown('**O que fazer:**')
@@ -393,13 +393,13 @@ def results(case: dict, commit, current: dict | None):
     if incompatible:
         for r in incompatible:
             with st.expander(f"Não compatível · {r['rule_id']} — {RULES[r['rule_id']]['Título v0.3']}", expanded=False):
-                _rule_detail(r)
+                _rule_detail(r, prefix='incompatible')
     else:st.success('Nenhuma incompatibilidade identificada nos critérios avaliados. Isso não comprova reciclabilidade integral.')
     st.markdown('### Informações e validações pendentes')
     if inconclusive:
         for r in inconclusive:
             with st.expander(f"Inconclusivo · {r['rule_id']} — {RULES[r['rule_id']]['Título v0.3']}"):
-                _rule_detail(r)
+                _rule_detail(r, prefix='inconclusive')
     else:st.caption('Nenhuma regra inconclusiva neste relatório.')
     trials = [r['rule_id'] for r in current['results'] if r.get('trial') in ('PENDENTE', 'REQUERIDO')]
     measurements = measurements_pending(current)
@@ -417,7 +417,7 @@ def results(case: dict, commit, current: dict | None):
         selected_id = st.selectbox('Detalhar uma regra',list(rules_by_id),
                                    format_func=lambda rid: f"{rid} — {RULES[rid]['Título v0.3']}",
                                    key='v04_detail_rule')
-        _rule_detail(rules_by_id[selected_id])
+        _rule_detail(rules_by_id[selected_id], prefix='full')
     st.download_button('Exportar relatório de avaliação (.json)',
                        data=json.dumps(current, indent=2, ensure_ascii=False).encode('utf-8'),
                        file_name=f"pet_circular_{case['product_id']}_resultado.json", mime='application/json',
