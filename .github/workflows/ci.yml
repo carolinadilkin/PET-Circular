@@ -2,11 +2,14 @@ name: PET Circular - testes Python
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - 'feature/**'
   push:
     branches:
       - main
       - 'development/**'
+      - 'feature/**'
   workflow_dispatch:
 
 permissions:
