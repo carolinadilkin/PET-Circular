@@ -1,0 +1,151 @@
+{
+  "project_id": "PET-CIRCULAR-TESTE-SINTETICO",
+  "product_id": "SYN-PET-PVC-LABEL-001",
+  "product_name": "SIMULAÇÃO — garrafa PET transparente 500 mL com rótulo PVC",
+  "phase": "projeto_definido",
+  "matrix_version": "0.3.3",
+  "design_version": "TESTE-SINTETICO-1",
+  "free_description": "CENÁRIO FICTÍCIO DE REGRESSÃO. Nunca usar como avaliação real ou laudo. Verifica PET-05 com rótulo PVC, densidade declarada de 1,38 g/cm³, sem comprovação de fixação e desprendimento.",
+  "facts": [
+    {
+      "key": "material_corpo",
+      "value": "PET",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "DOC-PVC-001"
+      ],
+      "human_confirmed_by": "Cenário de teste sintético",
+      "observation": "CONFIRMADO apenas como premissa do caso fictício; NÃO constitui validação laboratorial."
+    },
+    {
+      "key": "transparencia_corpo",
+      "value": "transparente",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "DOC-PVC-001"
+      ],
+      "human_confirmed_by": "Cenário de teste sintético",
+      "observation": "CONFIRMADO apenas como premissa do caso fictício; NÃO constitui validação laboratorial."
+    },
+    {
+      "key": "cor_corpo",
+      "value": "incolor",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "DOC-PVC-001"
+      ],
+      "human_confirmed_by": "Cenário de teste sintético",
+      "observation": "CONFIRMADO apenas como premissa do caso fictício; NÃO constitui validação laboratorial."
+    },
+    {
+      "key": "capacidade_ml",
+      "value": 500,
+      "unit": "mL",
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "DOC-PVC-001"
+      ],
+      "human_confirmed_by": "Cenário de teste sintético",
+      "observation": "CONFIRMADO apenas como premissa do caso fictício; NÃO constitui validação laboratorial."
+    },
+    {
+      "key": "polimero_rotulo",
+      "value": "PVC",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "DOC-PVC-001"
+      ],
+      "human_confirmed_by": "Cenário de teste sintético",
+      "observation": "CONFIRMADO apenas como premissa do caso fictício; NÃO constitui validação laboratorial."
+    },
+    {
+      "key": "densidade_rotulo",
+      "value": 1.38,
+      "unit": "g/cm³",
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "DOC-PVC-001"
+      ],
+      "human_confirmed_by": "Cenário de teste sintético",
+      "observation": "CONFIRMADO apenas como premissa do caso fictício; NÃO constitui validação laboratorial."
+    }
+  ],
+  "components": [
+    {
+      "id": "SIM-C01",
+      "kind": "corpo",
+      "presence": "SIM"
+    },
+    {
+      "id": "SIM-C02",
+      "kind": "tampa",
+      "presence": "DESCONHECIDA"
+    },
+    {
+      "id": "SIM-C03",
+      "kind": "rotulo",
+      "presence": "SIM"
+    },
+    {
+      "id": "SIM-C04",
+      "kind": "sleeve",
+      "presence": "DESCONHECIDA"
+    },
+    {
+      "id": "SIM-C05",
+      "kind": "adesivo",
+      "presence": "DESCONHECIDA"
+    },
+    {
+      "id": "SIM-C06",
+      "kind": "tinta",
+      "presence": "DESCONHECIDA"
+    },
+    {
+      "id": "SIM-C07",
+      "kind": "barreira",
+      "presence": "DESCONHECIDA"
+    },
+    {
+      "id": "SIM-C08",
+      "kind": "liner",
+      "presence": "DESCONHECIDA"
+    },
+    {
+      "id": "SIM-C09",
+      "kind": "valvula",
+      "presence": "DESCONHECIDA"
+    },
+    {
+      "id": "SIM-C10",
+      "kind": "lacre",
+      "presence": "DESCONHECIDA"
+    },
+    {
+      "id": "SIM-C11",
+      "kind": "outro",
+      "presence": "DESCONHECIDA"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-PVC-001",
+      "filename": "Ficha_Tecnica_Sintetica_PET_Rotulo_PVC.pdf",
+      "source_type": "upload",
+      "sha256": "f188bcd6caeba29aa57496be39ace033197fe3c566bd5d646431e29df7d6575a",
+      "version": "TESTE-SINTETICO-1",
+      "locator": "página 1",
+      "notes": "FONTE FICTÍCIA controlada para teste do software. Não é evidência real de fabricante e não atesta ensaio físico."
+    }
+  ]
+}

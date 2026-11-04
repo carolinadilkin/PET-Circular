@@ -1,0 +1,114 @@
+{
+  "aviso": "Comparação entre cenários totalmente sintéticos; não demonstra reciclabilidade real nem certificação.",
+  "motor": "0.1.0",
+  "matriz": "0.3.3",
+  "classe_global_A": "NAO_EMITIDA",
+  "classe_global_B": "NAO_EMITIDA",
+  "criterios": [
+    {
+      "regra": "PET-14",
+      "design_A": "NAO_ACIONADA",
+      "design_B": "NAO_ACIONADA",
+      "motivo_A": "Nenhum conflito de dados explícito detectado; completude por regra será verificada em cada critério",
+      "motivo_B": "Nenhum conflito de dados explícito detectado; completude por regra será verificada em cada critério"
+    },
+    {
+      "regra": "PET-01",
+      "design_A": "COMPATIVEL",
+      "design_B": "COMPATIVEL",
+      "motivo_A": "PET transparente incolor/azul-claro confirmado; apenas material/cor do corpo",
+      "motivo_B": "PET transparente incolor/azul-claro confirmado; apenas material/cor do corpo"
+    },
+    {
+      "regra": "PET-02",
+      "design_A": "NAO_ACIONADA",
+      "design_B": "NAO_ACIONADA",
+      "motivo_A": "Ausência confirmada de polímeros adicionais listados",
+      "motivo_B": "Ausência confirmada de polímeros adicionais listados"
+    },
+    {
+      "regra": "PET-03",
+      "design_A": "NAO_ACIONADA",
+      "design_B": "NAO_ACIONADA",
+      "motivo_A": "Sem negro de fumo declarado na composição",
+      "motivo_B": "Sem negro de fumo declarado na composição"
+    },
+    {
+      "regra": "PET-04",
+      "design_A": "INCONCLUSIVO",
+      "design_B": "INCONCLUSIVO",
+      "motivo_A": "Cobertura indicativa avaliada; método normativo e identificabilidade ainda não homologados",
+      "motivo_B": "Cobertura indicativa avaliada; método normativo e identificabilidade ainda não homologados"
+    },
+    {
+      "regra": "PET-07",
+      "design_A": "COMPATIVEL",
+      "design_B": "COMPATIVEL",
+      "motivo_A": "Critérios examinados do material e fixação da tampa atendidos; acessórios ausentes ou tratados fora desta regra",
+      "motivo_B": "Critérios examinados do material e fixação da tampa atendidos; acessórios ausentes ou tratados fora desta regra"
+    },
+    {
+      "regra": "PET-09",
+      "design_A": "NAO_COMPATIVEL",
+      "design_B": "COMPATIVEL",
+      "motivo_A": "Adesivo nao_liberavel incompatível na aplicação",
+      "motivo_B": "Liberação confirmada em lavagem aplicável a 70–90 °C"
+    },
+    {
+      "regra": "PET-11",
+      "design_A": "NAO_APLICAVEL",
+      "design_B": "NAO_APLICAVEL",
+      "motivo_A": "barreira comprovadamente ausente",
+      "motivo_B": "barreira comprovadamente ausente"
+    },
+    {
+      "regra": "PET-12",
+      "design_A": "NAO_APLICAVEL",
+      "design_B": "NAO_APLICAVEL",
+      "motivo_A": "barreira comprovadamente ausente",
+      "motivo_B": "barreira comprovadamente ausente"
+    },
+    {
+      "regra": "PET-13",
+      "design_A": "COMPATIVEL",
+      "design_B": "COMPATIVEL",
+      "motivo_A": "Laser para data de produção/validade",
+      "motivo_B": "Laser para data de produção/validade"
+    },
+    {
+      "regra": "PET-16",
+      "design_A": "INCONCLUSIVO",
+      "design_B": "INCONCLUSIVO",
+      "motivo_A": "Capacidade avaliada quando disponível; compactação pendente",
+      "motivo_B": "Capacidade avaliada quando disponível; compactação pendente"
+    },
+    {
+      "regra": "PET-17",
+      "design_A": "INCONCLUSIVO",
+      "design_B": "INCONCLUSIVO",
+      "motivo_A": "Easy-to-Empty sem dados experimentais suficientes",
+      "motivo_B": "Easy-to-Empty sem dados experimentais suficientes"
+    },
+    {
+      "regra": "PET-18",
+      "design_A": "NAO_COMPATIVEL",
+      "design_B": "COMPATIVEL",
+      "motivo_A": "Tinta: bleeding, ligante clorado, não conformidade EuPIA",
+      "motivo_B": "Composição/retentividade e EuPIA documentadas; apenas critério da tinta"
+    },
+    {
+      "regra": "PET-05",
+      "design_A": "NAO_COMPATIVEL",
+      "design_B": "INCONCLUSIVO",
+      "motivo_A": "Polímero do rótulo classificado como incompatível no contexto informado; Rótulo com densidade >1 g/cm³; Fixação sem desprendimento; Incompatibilidade associada verificada em PET-09; Incompatibilidade associada verificada em PET-18",
+      "motivo_B": "Material/fixação favoráveis; decoração completa ainda tem critérios pendentes"
+    },
+    {
+      "regra": "PET-19",
+      "design_A": "NAO_APLICAVEL",
+      "design_B": "NAO_APLICAVEL",
+      "motivo_A": "sleeve comprovadamente ausente",
+      "motivo_B": "sleeve comprovadamente ausente"
+    }
+  ]
+}

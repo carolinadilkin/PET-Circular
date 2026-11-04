@@ -1,0 +1,301 @@
+{
+  "engine_version": "0.1.0",
+  "matrix_version": "0.3.3",
+  "product_id": "SYN-PET-INTEGRADO-A-001",
+  "product_name": "SIMULAÇÃO — garrafa PET 500 mL, Design A",
+  "design_version": "DESIGN-A-SINTETICO-1",
+  "phase": "projeto_definido",
+  "scope": "DENTRO",
+  "global_recyclability_class": "NAO_EMITIDA",
+  "official_certification": false,
+  "summary": {
+    "incompatibilities_confirmed": [
+      "PET-09",
+      "PET-18",
+      "PET-05"
+    ],
+    "rules_inconclusive": [
+      "PET-04",
+      "PET-16",
+      "PET-17"
+    ],
+    "trials_pending": [
+      "PET-17"
+    ],
+    "data_issues": [],
+    "notes": [
+      "Avaliação demonstrativa por regras individuais; não constitui certificação RecyClass.",
+      "Sem classe global mesmo quando todos os critérios individuais parecem favoráveis.",
+      "Regras com método ou ensaio pendente não recebem aprovação presumida."
+    ]
+  },
+  "results": [
+    {
+      "rule_id": "PET-14",
+      "status": "NAO_ACIONADA",
+      "reason": "Nenhum conflito de dados explícito detectado; completude por regra será verificada em cada critério",
+      "missing": [],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-INT"
+      ]
+    },
+    {
+      "rule_id": "PET-01",
+      "status": "COMPATIVEL",
+      "reason": "PET transparente incolor/azul-claro confirmado; apenas material/cor do corpo",
+      "missing": [],
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-02",
+      "status": "NAO_ACIONADA",
+      "reason": "Ausência confirmada de polímeros adicionais listados",
+      "missing": [],
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-03",
+      "status": "NAO_ACIONADA",
+      "reason": "Sem negro de fumo declarado na composição",
+      "missing": [],
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04",
+        "REF-06"
+      ]
+    },
+    {
+      "rule_id": "PET-04",
+      "status": "INCONCLUSIVO",
+      "reason": "Cobertura indicativa avaliada; método normativo e identificabilidade ainda não homologados",
+      "missing": [
+        "validacao_metodo_normativo_cobertura"
+      ],
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {
+        "cobertura_pct": 30.0,
+        "limite_indicativo_pct": 50,
+        "acima_indicacao": false,
+        "gatilho_sep01": false
+      },
+      "sources": [
+        "REF-04",
+        "REF-09",
+        "REF-06"
+      ]
+    },
+    {
+      "rule_id": "PET-07",
+      "status": "COMPATIVEL",
+      "reason": "Critérios examinados do material e fixação da tampa atendidos; acessórios ausentes ou tratados fora desta regra",
+      "missing": [],
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-09",
+      "status": "NAO_COMPATIVEL",
+      "reason": "Adesivo nao_liberavel incompatível na aplicação",
+      "missing": [],
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "warnings": [],
+      "recommendations": [
+        "Substituir por adesivo liberável durante lavagem"
+      ],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-11",
+      "status": "NAO_APLICAVEL",
+      "reason": "barreira comprovadamente ausente",
+      "missing": [],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-12",
+      "status": "NAO_APLICAVEL",
+      "reason": "barreira comprovadamente ausente",
+      "missing": [],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-13",
+      "status": "COMPATIVEL",
+      "reason": "Laser para data de produção/validade",
+      "missing": [],
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-16",
+      "status": "INCONCLUSIVO",
+      "reason": "Capacidade avaliada quando disponível; compactação pendente",
+      "missing": [
+        "dimensoes_apos_compactacao",
+        "protocolo_compactacao"
+      ],
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {
+        "capacidade_l": 0.5,
+        "gatilho_5l": false
+      },
+      "sources": [
+        "REF-04",
+        "REF-09",
+        "REF-06"
+      ]
+    },
+    {
+      "rule_id": "PET-17",
+      "status": "INCONCLUSIVO",
+      "reason": "Easy-to-Empty sem dados experimentais suficientes",
+      "missing": [
+        "massa_conteudo_nominal_g",
+        "media_pos_esvaziar_g",
+        "metodo_ete",
+        "numero_ensaios",
+        "peso_embalagem_vazia_g"
+      ],
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "PENDENTE",
+      "details": {},
+      "sources": [
+        "REF-04",
+        "REF-05",
+        "REF-10"
+      ]
+    },
+    {
+      "rule_id": "PET-18",
+      "status": "NAO_COMPATIVEL",
+      "reason": "Tinta: bleeding, ligante clorado, não conformidade EuPIA",
+      "missing": [],
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "warnings": [],
+      "recommendations": [
+        "Substituir/reformular a tinta incompatível"
+      ],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04",
+        "REF-11"
+      ]
+    },
+    {
+      "rule_id": "PET-05",
+      "status": "NAO_COMPATIVEL",
+      "reason": "Polímero do rótulo classificado como incompatível no contexto informado; Rótulo com densidade >1 g/cm³; Fixação sem desprendimento; Incompatibilidade associada verificada em PET-09; Incompatibilidade associada verificada em PET-18",
+      "missing": [],
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "warnings": [],
+      "recommendations": [
+        "Revisar material, fixação e/ou decoração conforme incompatibilidade"
+      ],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04"
+      ]
+    },
+    {
+      "rule_id": "PET-19",
+      "status": "NAO_APLICAVEL",
+      "reason": "sleeve comprovadamente ausente",
+      "missing": [],
+      "evidence_ids": [],
+      "warnings": [],
+      "recommendations": [],
+      "trial": "NAO_REQUERIDO",
+      "details": {},
+      "sources": [
+        "REF-04",
+        "REF-09",
+        "REF-08"
+      ]
+    }
+  ]
+}

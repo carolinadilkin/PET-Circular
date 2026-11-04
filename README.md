@@ -1,4 +1,4 @@
-# PET Circular — App com extração documental e revisão humana (MVP v0.2)
+# PET Circular — MVP v0.3.1 com assistente de ecodesign
 
 **Objetivo:** avaliar aspectos de design de garrafas PET transparentes incolores ou azul-claras com base nas **15 regras individuais da matriz v0.3.3**, usando o motor determinístico v0.1. Esta versão acrescenta a leitura de PDFs, a extração de candidatos de dados técnicos, a proveniência por página e a confirmação humana antes de usar qualquer valor extraído na avaliação.
 
@@ -85,4 +85,16 @@ PET_Circular_App_IA_v02/
   requirements.txt               Dependências
 ```
 
+## Assistente de ecodesign — MVP v0.3 (prova de conceito)
+
+Na barra lateral, abra **Assistente de ecodesign**. O modo **Local — rastreável, sem API** responde com status do motor, campos faltantes, recomendações da matriz e links das referências das regras relacionadas. O modo **IA — OpenAI API** redige a explicação em linguagem natural, mediante chave e consentimento explícito; sua chamada envia somente a pergunta, os resultados relevantes e os trechos das regras (não os PDFs originais). A API não decide compatibilidade e sua resposta exige revisão.
+
+**Limitações:** identificação de regras por palavras-chave/IDs; a interpretação é limitada às 15 regras e ao estado corrente. O modo local não é IA generativa. A chamada externa foi verificada com mock, não com chave real. Dúvidas normativas exigem consulta humana à diretriz, e classe global não é emitida. Histórico da conversa é mantido somente na sessão Streamlit. Com os dados atuais do produto alterados, o diálogo é reiniciado.
+
+**Testes:** `python -m unittest discover -s tests -v` (70 testes offline).
+
 **Próximas entregas:** teste visual de extração e revisão no Windows, validação com documento real completo e autorizado, OCR opcional, avaliação de precisão da IA e melhorias de usabilidade. O agente conversacional e a plataforma multiempresa permanecem fora deste MVP.
+
+## Teste de regressão PVC — v0.3.1
+
+Consulte `docs/TESTE_PVC_REGRESSAO.md` e importe `examples/teste_rotulo_pvc_input.json`. Confirme o ID ativo e a contagem de fatos antes de executar a avaliação.

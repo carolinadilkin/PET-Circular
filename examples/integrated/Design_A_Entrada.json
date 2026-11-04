@@ -1,0 +1,414 @@
+{
+  "project_id": "PET-CIRCULAR-VALIDACAO-INTEGRADA",
+  "product_id": "SYN-PET-INTEGRADO-A-001",
+  "product_name": "SIMULAÇÃO — garrafa PET 500 mL, Design A",
+  "phase": "projeto_definido",
+  "matrix_version": "0.3.3",
+  "design_version": "DESIGN-A-SINTETICO-1",
+  "free_description": "Design A (referência): rótulo de PVC não desprendível; adesivo não liberável; tinta com ligante clorado. EXCLUSIVAMENTE PARA TESTAR O SOFTWARE. Dados não reais; nenhuma certificação ou ensaio realizado.",
+  "facts": [
+    {
+      "key": "material_corpo",
+      "value": "PET",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "transparencia_corpo",
+      "value": "transparente",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "cor_corpo",
+      "value": "incolor",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "capacidade_ml",
+      "value": 500,
+      "unit": "mL",
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "polimeros_corpo_secundarios",
+      "value": "nenhum",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "aditivos_corpo",
+      "value": "sem negro de fumo",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "material_tampa",
+      "value": "PP",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "densidade_tampa",
+      "value": 0.92,
+      "unit": "g/cm³",
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "fixacao_tampa",
+      "value": "desprendivel",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "cobertura_nao_pet_pct",
+      "value": 30,
+      "unit": "%",
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "metodo_cobertura",
+      "value": "estimativa geométrica sintética, NÃO homologada",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "marcacao_tecnologia",
+      "value": "laser",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "marcacao_finalidade",
+      "value": "validade",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "marcacao_local",
+      "value": "corpo PET",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "produto_tipo",
+      "value": "liquido",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "polimero_rotulo",
+      "value": "PVC",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "densidade_rotulo",
+      "value": 1.38,
+      "unit": "g/cm³",
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "fixacao_rotulo",
+      "value": "nao_desprendivel",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "desprendimento",
+      "value": false,
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "comportamento_adesivo",
+      "value": "nao_liberavel",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "tinta_bleeding",
+      "value": true,
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "tinta_washable",
+      "value": false,
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "tinta_metalica",
+      "value": false,
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "tinta_ligantes",
+      "value": "ligante clorado",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "eupia_declaracao",
+      "value": false,
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "tinta_formulacao",
+      "value": "sistema sintético com ligante clorado",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    },
+    {
+      "key": "protocolo_tintas",
+      "value": "apenas simulação, sem ensaio físico",
+      "unit": null,
+      "evidence_status": "CONFIRMADO",
+      "applicability": "SIM",
+      "evidence_ids": [
+        "SYN-INTEGRADO-A-01"
+      ],
+      "human_confirmed_by": "Premissa fictícia controlada",
+      "observation": "CONFIRMADO apenas para simulação; não constitui prova documental real ou resultado experimental."
+    }
+  ],
+  "components": [
+    {
+      "id": "SYN-A-C01",
+      "kind": "corpo",
+      "presence": "SIM",
+      "notes": "Presença/ausência definida como premissa fictícia deste cenário, não evidência real."
+    },
+    {
+      "id": "SYN-A-C02",
+      "kind": "tampa",
+      "presence": "SIM",
+      "notes": "Presença/ausência definida como premissa fictícia deste cenário, não evidência real."
+    },
+    {
+      "id": "SYN-A-C03",
+      "kind": "rotulo",
+      "presence": "SIM",
+      "notes": "Presença/ausência definida como premissa fictícia deste cenário, não evidência real."
+    },
+    {
+      "id": "SYN-A-C04",
+      "kind": "sleeve",
+      "presence": "NAO",
+      "notes": "Presença/ausência definida como premissa fictícia deste cenário, não evidência real."
+    },
+    {
+      "id": "SYN-A-C05",
+      "kind": "adesivo",
+      "presence": "SIM",
+      "notes": "Presença/ausência definida como premissa fictícia deste cenário, não evidência real."
+    },
+    {
+      "id": "SYN-A-C06",
+      "kind": "tinta",
+      "presence": "SIM",
+      "notes": "Presença/ausência definida como premissa fictícia deste cenário, não evidência real."
+    },
+    {
+      "id": "SYN-A-C07",
+      "kind": "barreira",
+      "presence": "NAO",
+      "notes": "Presença/ausência definida como premissa fictícia deste cenário, não evidência real."
+    },
+    {
+      "id": "SYN-A-C08",
+      "kind": "liner",
+      "presence": "NAO",
+      "notes": "Presença/ausência definida como premissa fictícia deste cenário, não evidência real."
+    },
+    {
+      "id": "SYN-A-C09",
+      "kind": "valvula",
+      "presence": "NAO",
+      "notes": "Presença/ausência definida como premissa fictícia deste cenário, não evidência real."
+    },
+    {
+      "id": "SYN-A-C10",
+      "kind": "lacre",
+      "presence": "NAO",
+      "notes": "Presença/ausência definida como premissa fictícia deste cenário, não evidência real."
+    },
+    {
+      "id": "SYN-A-C11",
+      "kind": "outro",
+      "presence": "NAO",
+      "notes": "Presença/ausência definida como premissa fictícia deste cenário, não evidência real."
+    }
+  ],
+  "documents": [
+    {
+      "id": "SYN-INTEGRADO-A-01",
+      "filename": "Ficha_Sintetica_Design_A.pdf",
+      "source_type": "upload",
+      "sha256": "5e12c989483ff976556c3f07dd1058a30f890f4d44a068fa2d7c093a887247b4",
+      "version": "DESIGN-A-SIM-1",
+      "locator": "Ficha sintética, páginas 1-2",
+      "notes": "DOCUMENTO FICTÍCIO produzido apenas para teste do programa. Não usar como evidência de fornecedor."
+    }
+  ]
+}
