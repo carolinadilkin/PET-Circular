@@ -1,5 +1,5 @@
 {
-  "engine_version": "0.1.1",
+  "engine_version": "0.1.2",
   "matrix_version": "0.3.3",
   "product_id": "SYN-PET-INTEGRADO-B-001",
   "product_name": "SIMULAÇÃO — garrafa PET 500 mL, Design B",
@@ -202,10 +202,12 @@
     {
       "rule_id": "PET-16",
       "status": "INCONCLUSIVO",
-      "reason": "Capacidade avaliada quando disponível; compactação pendente",
+      "reason": "Critério dimensional ainda não conclusivo: confirmar capacidade e/ou medição pós-compactação",
       "missing": [
         "dimensoes_apos_compactacao",
-        "protocolo_compactacao"
+        "fonte_medicao",
+        "protocolo_compactacao",
+        "validacao_operacional_4cm"
       ],
       "evidence_ids": [
         "SYN-INTEGRADO-B-01"
@@ -215,7 +217,11 @@
       "trial": "NAO_REQUERIDO",
       "details": {
         "capacidade_l": 0.5,
-        "gatilho_5l": false
+        "dimensao_compactada_cm": null,
+        "gatilho_5l": false,
+        "gatilho_4cm": null,
+        "protocolo_4cm_validado": false,
+        "nota_sep01": "SEP-01 <50 mm em duas dimensões é um procedimento distinto"
       },
       "sources": [
         "REF-04",

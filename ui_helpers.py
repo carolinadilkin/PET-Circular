@@ -21,6 +21,7 @@ ALIASES={'evidencias_NIR':'evidencias_nir','EUPIA_declaracao':'eupia_declaracao'
 NUMBER_KEYS={'volume_ml','capacidade_ml','volume_l','cobertura_nao_pet_pct','densidade_rotulo','densidade_tampa',
              'percentual_pa_mxd6_massa','peso_embalagem_vazia_g','massa_conteudo_nominal_g','media_pos_esvaziar_g',
              'numero_ensaios','sleeve_densidade','sleeve_cobertura_pct','massa_corpo_g',
+             'dimensoes_apos_compactacao',
              'area_referencia_frente_cm2','area_coberta_frente_cm2','area_referencia_verso_cm2',
              'area_coberta_verso_cm2','area_referencia_lateral_cm2','area_coberta_lateral_cm2',
              'incerteza_cobertura_pct'}

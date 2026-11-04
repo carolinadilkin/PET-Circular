@@ -49,3 +49,7 @@ Para a suíte completa (incluindo testes legados de Streamlit) no repositório, 
 ## Atualização PET-04 (motor v0.1.1)
 
 O procedimento interno [PTI-PET04-001](docs/PTI-PET04-001.md) permite registrar M1 (áreas de frente/verso; prevalece maior proporção) ou M2 (área lateral), além do percentual legado. Gatilhos SEP-01 independentes (rótulo de outro polímero >50%, sleeve integral, metalização) são apontados quando identificados. A geometria **não** comprova o desempenho NIR, por isso a PET-04 permanece inconclusiva sem validação específica. Próxima tarefa técnica: [PET-16](docs/PROXIMA_PET16.md).
+
+## PET-16 — dimensões após compactação (motor 0.1.2)
+
+A PET-16 distingue `>5 L` de dimensão compactada `≤4 cm`, com fonte, protocolo e confirmação operacional explícitos. Sem medição adequada, o critério permanece inconclusivo. `NAO_ACIONADA` não é certificação. Detalhes em `docs/PTI-PET16-001.md`.
