@@ -1,28 +1,29 @@
 @echo off
 setlocal
 cd /d "%~dp0"
-where py >nul 2>&1
-if errorlevel 1 (
-  echo Python nao encontrado. Instale Python 3.11+ e tente novamente.
-  pause
-  exit /b 1
+echo.
+echo PET Circular v0.4 Web - Interface aprovada
+where py >nul 2>nul
+if %ERRORLEVEL% EQU 0 (
+    set "PY=py"
+) else (
+    set "PY=python"
 )
 if not exist ".venv\Scripts\python.exe" (
-  echo Criando ambiente Python local...
-  py -m venv .venv
-  if errorlevel 1 goto ERRO
+    echo Preparando ambiente local Python...
+    %PY% -m venv .venv
+    if errorlevel 1 goto :error
 )
-set "PY=.venv\Scripts\python.exe"
-"%PY%" -c "import streamlit,jsonschema,pandas,pypdf,openai" >nul 2>&1
-if errorlevel 1 (
-  echo Instalando dependencias: requer acesso a internet...
-  "%PY%" -m pip install -r requirements.txt
-  if errorlevel 1 goto ERRO
-)
-echo Iniciando PET Circular em http://127.0.0.1:8501
-"%PY%" -m streamlit run app.py
+echo Instalando/atualizando dependencias da interface web...
+".venv\Scripts\python.exe" -m pip install -r requirements-web.txt
+if errorlevel 1 goto :error
+echo.
+echo Abrindo PET Circular em http://127.0.0.1:8501
+".venv\Scripts\python.exe" server.py
+if errorlevel 1 goto :error
 exit /b 0
-:ERRO
-echo Nao foi possivel iniciar. Confira a mensagem acima.
+:error
+echo.
+echo Falha ao iniciar. Confira o Python e a conexao com a internet.
 pause
 exit /b 1

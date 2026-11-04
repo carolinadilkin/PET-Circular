@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>PET Circular v0.4 Web — Guided Ecodesign Studio</title>
+<link href="/static/styles.css" rel="stylesheet"/></head>
+<body>
+<a class="skip" href="#content">Pular para o conteúdo</a>
+<header class="top">
+<div class="brand"><span aria-hidden="true" class="logo">↻</span><div><b>PET Circular</b><small>Guided Ecodesign Studio</small></div></div>
+<nav aria-label="Navegação principal" class="nav"><button class="active" data-view="inicio" type="button">Início</button><button data-view="avaliacao" type="button">Avaliação</button><button data-view="comparacao" type="button">Comparação</button><button data-view="projetos" type="button">Projetos</button></nav>
+<div class="topright">Matriz 0.3.3 · Web v0.4</div>
+</header>
+<div class="demo" role="status">APLICATIVO LOCAL · Avaliação por critérios, sem certificação global · Documentos não armazenados no servidor</div>
+<main id="content" tabindex="-1">
+<section class="page active" id="page-inicio">
+<div class="hero"><div><span class="eyebrow">Ecodesign orientado por evidências</span><h1>Embalagens melhores começam com decisões claras.</h1><p>Avalie aspectos do design de garrafas PET transparentes, entenda incompatibilidades e compare alternativas — sem precisar conhecer a estrutura interna das regras.</p><div class="buttons"><button class="btn" data-step="0" data-view="avaliacao">Começar avaliação <span aria-hidden="true">→</span></button><button class="btn secondary" data-view="comparacao">Ver comparação A/B</button></div></div><aside class="hero-side"><span class="pill">Escopo atual</span><strong>Garrafas PET transparentes, incolores ou azul-claras</strong><p>O sistema informa a compatibilidade por critério e as lacunas de evidência. Não emite classe global de reciclabilidade nem certificação.</p><p><b>Exemplos de teste:</b> os Designs A/B são inteiramente sintéticos. Projetos próprios são avaliados separadamente.</p></aside></div>
+<div class="heading"><h2>O que tu queres fazer?</h2><p>Escolhe uma tarefa. Os detalhes técnicos aparecem apenas quando forem necessários.</p></div>
+<div class="actions">
+<button class="card action" data-step="0" data-view="avaliacao"><span aria-hidden="true" class="symbol">▧</span><h3>Avaliar uma embalagem</h3><p>Informe os componentes, adicione dados técnicos e veja o que precisa de atenção.</p><footer>Iniciar avaliação →</footer></button>
+<button class="card action" data-view="comparacao"><span aria-hidden="true" class="symbol">⇄</span><h3>Comparar designs</h3><p>Veja quais problemas foram resolvidos, quais ficaram pendentes e o que mudou.</p><footer>Comparar versões →</footer></button>
+<button class="card action" data-view="projetos"><span aria-hidden="true" class="symbol">▤</span><h3>Continuar um projeto</h3><p>Retome uma avaliação, abra versões salvas ou importe dados de um projeto existente.</p><footer>Ver projetos →</footer></button>
+</div>
+<div class="help">A avaliação permite trabalhar com informações parciais. Tudo o que for declarado, confirmado ou inconclusivo fica identificado no resultado. Nenhuma classificação global é emitida.</div>
+</section>
+<section class="page" id="page-avaliacao"><div class="loading">Preparando a área...</div></section>
+<section class="page" id="page-comparacao"><div class="loading">Preparando a área...</div></section>
+<section class="page" id="page-projetos"><div class="loading">Preparando a área...</div></section>
+<footer class="footer">PET Circular · Guided Ecodesign Studio v0.4 Web · Motor determinístico e revisão humana · Sem certificação global</footer>
+</main>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+<script defer="True" src="/static/app.js"></script></body></html>
