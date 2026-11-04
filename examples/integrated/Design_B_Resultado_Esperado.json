@@ -1,5 +1,5 @@
 {
-  "engine_version": "0.1.0",
+  "engine_version": "0.1.1",
   "matrix_version": "0.3.3",
   "product_id": "SYN-PET-INTEGRADO-B-001",
   "product_name": "SIMULAÇÃO — garrafa PET 500 mL, Design B",
@@ -93,21 +93,29 @@
     {
       "rule_id": "PET-04",
       "status": "INCONCLUSIVO",
-      "reason": "Cobertura indicativa avaliada; método normativo e identificabilidade ainda não homologados",
+      "reason": "Cobertura indicativa avaliada; identificabilidade NIR ainda não comprovada",
       "missing": [
-        "validacao_metodo_normativo_cobertura"
+        "comprovacao_identificabilidade_NIR"
       ],
       "evidence_ids": [
         "SYN-INTEGRADO-B-01"
       ],
-      "warnings": [],
+      "warnings": [
+        "Método legado de cobertura: indicador não homologado pelo PTI-PET04-001"
+      ],
       "recommendations": [],
       "trial": "NAO_REQUERIDO",
       "details": {
+        "procedimento": "PTI-PET04-001 v0.1",
+        "comprovacao_nir": false,
+        "origem_cobertura": "percentual_informado",
         "cobertura_pct": 30.0,
         "limite_indicativo_pct": 50,
         "acima_indicacao": false,
-        "gatilho_sep01": false
+        "faixa_indicativa": "ATE_LIMITE",
+        "gatilho_sep01": false,
+        "gatilhos_sep01": [],
+        "gatilhos_a_esclarecer": []
       },
       "sources": [
         "REF-04",

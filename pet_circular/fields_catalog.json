@@ -115,16 +115,16 @@
       "% 0–100",
       "PET-04,19",
       "Projeto gráfico/medição",
-      "P-01: método operacional pendente"
+      "Percentual informado ou calculado por PTI-PET04-001; não comprova NIR"
     ],
     [
       "metodo_cobertura",
       "Texto / protocolo",
       "Condicional",
-      "denominador, faces, geometria, evidência",
+      "M1 | M2 | legado documentado",
       "PET-04",
       "Medição geométrica",
-      "Não presumir % de sleeve"
+      "PTI-PET04-001 v0.1; M1 maior face, M2 área lateral"
     ],
     [
       "criterio_sep01",
@@ -133,7 +133,7 @@
       "gatilho aplicável | não identificado | desconhecido",
       "PET-04,19",
       "SEP-01 v3.0",
-      "Aplicabilidade do SEP-01 requer critérios técnicos e evidência; determinação ainda pendente (AC-08)."
+      "Derivado/identificado por gatilhos técnicos; nunca substituir avaliação SEP-01"
     ],
     [
       "tipo_rotulo",
@@ -683,6 +683,78 @@
       "PET-19",
       "Projeto/medição",
       "Não equiparar automaticamente à soma de cobertura não-PET"
+    ],
+    [
+      "area_referencia_frente_cm2",
+      "Número",
+      "Condicional M1",
+      "cm²; >0",
+      "PET-04",
+      "CAD/desenho técnico",
+      "Denominador da projeção frontal"
+    ],
+    [
+      "area_coberta_frente_cm2",
+      "Número",
+      "Condicional M1",
+      "cm²; 0 até referência",
+      "PET-04",
+      "CAD/desenho técnico",
+      "Cobertura frontal não-PET"
+    ],
+    [
+      "area_referencia_verso_cm2",
+      "Número",
+      "Condicional M1",
+      "cm²; >0",
+      "PET-04",
+      "CAD/desenho técnico",
+      "Denominador da projeção posterior"
+    ],
+    [
+      "area_coberta_verso_cm2",
+      "Número",
+      "Condicional M1",
+      "cm²; 0 até referência",
+      "PET-04",
+      "CAD/desenho técnico",
+      "Cobertura posterior não-PET"
+    ],
+    [
+      "area_referencia_lateral_cm2",
+      "Número",
+      "Condicional M2",
+      "cm²; >0",
+      "PET-04",
+      "CAD/medição técnica",
+      "Superfície lateral de referência; convenção PTI"
+    ],
+    [
+      "area_coberta_lateral_cm2",
+      "Número",
+      "Condicional M2",
+      "cm²; 0 até referência",
+      "PET-04",
+      "CAD/medição técnica",
+      "Cobertura não-PET na superfície lateral"
+    ],
+    [
+      "incerteza_cobertura_pct",
+      "Número",
+      "Opcional",
+      "pontos percentuais; 0–100",
+      "PET-04",
+      "Análise de medição",
+      "Faixa que cruza limite resulta em indicação limítrofe"
+    ],
+    [
+      "metalizacao_decoracao",
+      "Lista",
+      "Condicional",
+      "sim | não | desconhecido",
+      "PET-04",
+      "Ficha da decoração",
+      "Gatilho de triagem distinto do percentual"
     ]
   ]
 }

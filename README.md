@@ -45,3 +45,7 @@ python -m unittest discover -s tests -v
 Os testes de API ficam em `tests/test_web_v04.py`. O fluxo de navegador foi executado por ponte em memória com o FastAPI local; o ambiente bloqueia acesso direto do navegador à porta localhost. É necessária verificação final de uso real no Windows.
 
 Para a suíte completa (incluindo testes legados de Streamlit) no repositório, instale também as dependências de `requirements.txt` e `httpx` conforme o workflow GitHub Actions.
+
+## Atualização PET-04 (motor v0.1.1)
+
+O procedimento interno [PTI-PET04-001](docs/PTI-PET04-001.md) permite registrar M1 (áreas de frente/verso; prevalece maior proporção) ou M2 (área lateral), além do percentual legado. Gatilhos SEP-01 independentes (rótulo de outro polímero >50%, sleeve integral, metalização) são apontados quando identificados. A geometria **não** comprova o desempenho NIR, por isso a PET-04 permanece inconclusiva sem validação específica. Próxima tarefa técnica: [PET-16](docs/PROXIMA_PET16.md).
