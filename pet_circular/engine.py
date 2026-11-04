@@ -20,7 +20,7 @@ try:
 except ImportError:  # erro claro no comando principal
     Draft202012Validator = None
 
-VERSION = '0.1.1'
+VERSION = '0.1.2'
 RULE_ORDER = ('PET-14','PET-01','PET-02','PET-03','PET-04','PET-07','PET-09',
               'PET-11','PET-12','PET-13','PET-16','PET-17','PET-18','PET-05','PET-19')
 ALLOWED = {'COMPATIVEL','LIMITADA','NAO_COMPATIVEL','INCONCLUSIVO',
@@ -434,23 +434,88 @@ def r13(c:Context)->Outcome:
 
 
 def r16(c:Context)->Outcome:
-    volume,_,ev,_=c.read('volume_l')
-    if 'volume_l' in volume: vol=decimal_value(volume['volume_l'])
-    else:
-        alt,_,ex,_=c.read('capacidade_ml','volume_ml');ev+=ex
-        n=alt.get('capacidade_ml',alt.get('volume_ml'));vol=decimal_value(n);vol=vol/1000 if vol is not None else None
-    compact,cm,ce,_=c.read('dimensoes_apos_compactacao','protocolo_compactacao');ev+=ce
-    dim=decimal_value(compact.get('dimensoes_apos_compactacao'))
-    if vol is not None and vol>5:
-        return c.result('PET-16','NAO_COMPATIVEL',f'Capacidade nominal de {vol} L excede 5 L',evidence=ev,recommendations=['Avaliar redimensionamento ou outro fluxo de coleta'],details={'capacidade_l':float(vol)})
-    if vol is not None and vol<=0:return c.result('PET-16',reason='Capacidade deve ser positiva',missing=['volume_l_valido'])
-    if dim is not None and dim<=4 and 'protocolo_compactacao' in compact:
-        # O método de 4 cm ainda carece de homologação. Não declarar incompatibilidade conclusiva.
-        return c.result('PET-16',reason='Dimensão ≤4 cm indicada, porém aplicação operacional do limite ainda requer validação',evidence=ev,missing=['validacao_operacional_4cm'],warnings=['Possível incompatibilidade dimensional; não homologada'],details={'dimensao_cm':float(dim)})
-    if dim is not None and dim<0:return c.result('PET-16',reason='Dimensão compactada inválida',missing=['dimensoes_apos_compactacao_validas'])
-    if vol is None or dim is None or 'protocolo_compactacao' not in compact:
-        return c.result('PET-16',reason='Capacidade avaliada quando disponível; compactação pendente',missing=([ 'volume_l' ] if vol is None else [])+([ 'dimensoes_apos_compactacao','protocolo_compactacao' ] if dim is None or 'protocolo_compactacao' not in compact else []),evidence=ev,details={'capacidade_l':float(vol) if vol is not None else None,'gatilho_5l':False if vol is not None else None})
-    return c.result('PET-16',reason='Capacidade ≤5 L; interpretação do limite compactado ainda não homologada',evidence=ev,missing=['validacao_operacional_4cm'],details={'capacidade_l':float(vol) if vol is not None else None})
+    """PET-16: vetos independentes por capacidade (>5 L) e dimensão compactada (≤4 cm).
+
+    4 cm da diretriz DfR NÃO é o critério do ensaio SEP-01 (duas dimensões <50 mm).
+    A decisão dimensional exige confirmação explícita do método interno, registro de
+    medição física pós-compactação e proveniência. Sem eles, não presumir aprovação.
+    """
+    evidence=[]
+    capacities={}
+    invalid=[]
+    for key,scale in (('volume_l',Decimal('1')),('capacidade_ml',Decimal('0.001')),
+                      ('volume_ml',Decimal('0.001'))):
+        value,ev,_=c.lookup(key)
+        evidence+=ev
+        if value is None:continue
+        number=decimal_value(value)
+        if number is None or number<=0:
+            invalid.append(key)
+        else:
+            capacities[key]=number*scale
+
+    unique=set(capacities.values())
+    conflict=len(unique)>1
+    vol=next(iter(unique)) if len(unique)==1 else None
+    volume_valid=not conflict and not invalid and vol is not None
+
+    fields,missing,ev,_=c.read('dimensoes_apos_compactacao','protocolo_compactacao',
+                               'fonte_medicao','validacao_operacional_4cm')
+    evidence+=ev
+    dimension=decimal_value(fields.get('dimensoes_apos_compactacao'))
+    method=fields.get('protocolo_compactacao')
+    source=fields.get('fonte_medicao')
+    validated=yes(fields.get('validacao_operacional_4cm')) is True
+    dimension_unit='cm'
+    for f in c.facts.get('dimensoes_apos_compactacao',[]):
+        if f.get('evidence_status')=='CONFIRMADO' and f.get('value') is not None:
+            unit=norm(f.get('unit',''))
+            if unit not in {'','cm','centimetro','centimetros'}:
+                dimension_unit=unit
+            break
+    valid_dimension=(dimension is not None and dimension>0 and dimension_unit=='cm')
+    ready=(valid_dimension and bool(str(method or '').strip())
+           and bool(str(source or '').strip()) and validated)
+
+    details={'capacidade_l':float(vol) if volume_valid else None,
+             'dimensao_compactada_cm':float(dimension) if valid_dimension else None,
+             'gatilho_5l':(vol>5) if volume_valid else None,
+             'gatilho_4cm':(dimension<=4) if ready else None,
+             'protocolo_4cm_validado':bool(ready),
+             'nota_sep01':'SEP-01 <50 mm em duas dimensões é um procedimento distinto'}
+    warnings=[]
+    pending=[]
+    if conflict:warnings.append('Capacidades confirmadas divergentes entre L e mL; reconciliar os dados')
+    if invalid:warnings.append('Capacidade confirmada inválida: '+', '.join(invalid))
+    if dimension is not None and not valid_dimension:
+        warnings.append('Dimensão pós-compactação inválida ou unidade diferente de cm')
+        pending.append('dimensoes_apos_compactacao_validas_em_cm')
+    if not valid_dimension and dimension is None:
+        pending.append('dimensoes_apos_compactacao')
+    if not method or not str(method).strip():pending.append('protocolo_compactacao')
+    if not source or not str(source).strip():pending.append('fonte_medicao')
+    if not validated:pending.append('validacao_operacional_4cm')
+    if not volume_valid:pending.append('capacidade_nominal_confirmada_e_consistente')
+    if ready and dimension<=4:
+        return c.result('PET-16','NAO_COMPATIVEL',
+            f'Dimensão medida pós-compactação de {dimension} cm (≤4 cm), com procedimento interno confirmado',
+            missing=['capacidade_nominal_confirmada_e_consistente'] if not volume_valid else [],
+            evidence=evidence,warnings=warnings,
+            recommendations=['Revisar geometria e avaliar comportamento na triagem'],details=details)
+    if volume_valid and vol>5:
+        return c.result('PET-16','NAO_COMPATIVEL',
+            f'Capacidade nominal de {vol} L excede 5 L',
+            missing=[p for p in pending if p!='capacidade_nominal_confirmada_e_consistente'],
+            evidence=evidence,warnings=warnings,
+            recommendations=['Avaliar redimensionamento ou outra rota de coleta/triagem'],details=details)
+    if ready and volume_valid and dimension>4:
+        return c.result('PET-16','NAO_ACIONADA',
+            'Capacidade ≤5 L e dimensão pós-compactação >4 cm; vetos dimensionais não acionados',
+            evidence=evidence,warnings=warnings,details=details)
+    if valid_dimension and dimension<=4 and not ready:
+        warnings.append('Possível gatilho ≤4 cm; faltam validação operacional e/ou fonte da medição')
+    return c.result('PET-16',reason='Critério dimensional ainda não conclusivo: confirmar capacidade e/ou medição pós-compactação',
+                    missing=pending,evidence=evidence,warnings=warnings,details=details)
 
 
 def r17(c:Context)->Outcome:

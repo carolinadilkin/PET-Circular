@@ -143,9 +143,9 @@ class TestEngine(unittest.TestCase):
         fact(p,'marcacao_finalidade','decoracao')
         self.assertEqual(check(p,'PET-13')['status'],'NAO_COMPATIVEL')
     def test_26_volume_boundary(self):
-        p=base();fact(p,'volume_l',5)
+        p=base();fact(p,'capacidade_ml',5000)
         self.assertEqual(check(p,'PET-16')['status'],'INCONCLUSIVO')
-        fact(p,'volume_l',5.001)
+        fact(p,'capacidade_ml',5001)
         self.assertEqual(check(p,'PET-16')['status'],'NAO_COMPATIVEL')
     def test_27_compacted_size_not_homologated(self):
         p=base();fact(p,'volume_l',0.5);fact(p,'dimensoes_apos_compactacao',3.5);fact(p,'protocolo_compactacao','ensaio interno')

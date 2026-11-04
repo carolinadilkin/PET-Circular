@@ -382,10 +382,10 @@
       "dimensoes_apos_compactacao",
       "Número / documento",
       "Condicional",
-      "cm; método validado",
+      "cm; número >0, após compactação física",
       "PET-16",
       "Ensaio pós-compactação",
-      "P-02 pendente"
+      "Dimensão de controle declarada no protocolo interno; não inferir de CAD ou dimensão original"
     ],
     [
       "protocolo_compactacao",
@@ -394,7 +394,7 @@
       "método, condição, medição",
       "PET-16",
       "SEP-01 / método validado",
-      "Não inferir de CAD"
+      "Método documentado para a amostra compactada; SEP-01 50 mm é critério distinto"
     ],
     [
       "produto_tipo",
@@ -655,7 +655,7 @@
       "ID/URI + método + data",
       "PET-16",
       "Laboratório / relatório",
-      "Sem método aprovado, não concluir gatilho 4 cm"
+      "Relatório/registro da medição física pós-compactação; requerido para conclusão de 4 cm"
     ],
     [
       "protocolo_tintas",
@@ -755,6 +755,15 @@
       "PET-04",
       "Ficha da decoração",
       "Gatilho de triagem distinto do percentual"
+    ],
+    [
+      "validacao_operacional_4cm",
+      "Booleano/lista",
+      "Condicional para decisão dimensional",
+      "sim | não",
+      "PET-16",
+      "Revisão técnica do método e do registro de medição",
+      "Somente SIM explícito e CONFIRMADO habilita decisão de 4 cm; não é certificação RecyClass"
     ]
   ]
 }
