@@ -20,7 +20,7 @@ try:
 except ImportError:  # erro claro no comando principal
     Draft202012Validator = None
 
-VERSION = '0.1.0'
+VERSION = '0.1.1'
 RULE_ORDER = ('PET-14','PET-01','PET-02','PET-03','PET-04','PET-07','PET-09',
               'PET-11','PET-12','PET-13','PET-16','PET-17','PET-18','PET-05','PET-19')
 ALLOWED = {'COMPATIVEL','LIMITADA','NAO_COMPATIVEL','INCONCLUSIVO',
@@ -194,38 +194,132 @@ def r03(c:Context)->Outcome:
     return c.result('PET-03',reason='Negro de fumo com outra função; enquadramento não determinado por esta regra',evidence=e+e2,missing=['avaliacao_especifica_aditivo'])
 
 
+def _pet04_geometric_coverage(c:Context, method:str):
+    """PTI-PET04-001 v0.1: M1 (maior projeção) ou M2 (superfície lateral).
+
+    A medição geométrica é indicador de projeto, nunca comprovação de triagem NIR.
+    """
+    if method not in {'m1','m2'}:
+        return None, {}, [], [], []
+    if method=='m1':
+        keys=('area_referencia_frente_cm2','area_coberta_frente_cm2',
+              'area_referencia_verso_cm2','area_coberta_verso_cm2')
+    else:
+        keys=('area_referencia_lateral_cm2','area_coberta_lateral_cm2')
+    d,missing,e,_=c.read(*keys)
+    if missing:return None,{'metodo_geometrico':'M1' if method=='m1' else 'M2'},missing,e,[]
+    values={k:decimal_value(d[k]) for k in keys}
+    invalid=[k for k in keys if values[k] is None]
+    if invalid:return None,{},[k+'_valida' for k in invalid],e,[]
+    if method=='m1':
+        front,front_cover,back,back_cover=[values[k] for k in keys]
+        if front<=0 or back<=0 or front_cover<0 or back_cover<0 or front_cover>front or back_cover>back:
+            return None,{},['areas_geometricas_validas'],e,[]
+        cf=Decimal(100)*front_cover/front
+        cb=Decimal(100)*back_cover/back
+        return max(cf,cb),{'metodo_geometrico':'M1','cobertura_frente_pct':float(cf),
+                            'cobertura_verso_pct':float(cb),'criterio_agregacao':'maior_face'},[],e,[]
+    total,covered=[values[k] for k in keys]
+    if total<=0 or covered<0 or covered>total:
+        return None,{},['areas_geometricas_validas'],e,[]
+    pct=Decimal(100)*covered/total
+    return pct,{'metodo_geometrico':'M2','area_referencia_cm2':float(total),
+                'area_coberta_cm2':float(covered)},[],e,[]
+
+
 def r04(c:Context)->Outcome:
-    dec={x:c.presence(x) for x in ('rotulo','sleeve')}
-    if all(v=='NAO' for v in dec.values()):return c.result('PET-04','NAO_APLICAVEL','Não há rótulo ou sleeve')
-    if all(v!='SIM' for v in dec.values()):return c.result('PET-04',reason='Decoração não confirmada',missing=['presenca_rotulo_ou_sleeve'])
-    d,m,e,p=c.read('cobertura_nao_pet_pct')
-    pct=decimal_value(d.get('cobertura_nao_pet_pct'))
-    if pct is not None and not (0<=pct<=100):return c.result('PET-04',reason='Percentual de cobertura fora de 0 a 100',missing=['cobertura_nao_pet_pct_valida'],evidence=e)
-    volume_val,_,ve,_=c.read('volume_ml')
-    if 'volume_ml' not in volume_val:
-        alternate,_,ve2,_=c.read('capacidade_ml')
-        volume_val={'volume_ml':alternate.get('capacidade_ml')};ve+=ve2
-    vol=decimal_value(volume_val.get('volume_ml'))
-    if pct is None or vol is None or vol<=0:
-        missed=(['cobertura_nao_pet_pct'] if pct is None else [])+(['volume_ml'] if vol is None or vol<=0 else [])
-        return c.result('PET-04',reason='Dados para cálculo de cobertura faltantes',missing=missed,evidence=e+ve)
-    threshold=Decimal('50') if vol<=500 else Decimal('70')
-    over=pct>threshold
-    method,missing_method,em,_=c.read('metodo_cobertura')
-    sep,_,se,_=c.read('criterio_sep01')
-    requires_trial=yes(sep.get('criterio_sep01')) is True
-    mat,_,me,_=c.read('polimero_decoracao','tipo_decoracao')
-    if norm(mat.get('tipo_decoracao')) in {'rotulo','label'} and norm(mat.get('polimero_decoracao')) not in {'','pet'} and pct>50:
-        requires_trial=True
-    trial='REQUERIDO' if requires_trial else ('ALERTA' if over else 'NAO_REQUERIDO')
-    warnings=[]
-    if over:warnings.append(f'Cobertura {pct}% excede indicação preventiva de {threshold}%')
-    if not method:warnings.append('Método de cobertura não documentado; parâmetro operacional ainda não homologado')
-    return c.result('PET-04', 'INCONCLUSIVO',
-        'Cobertura indicativa avaliada; método normativo e identificabilidade ainda não homologados',missing=missing_method + ['validacao_metodo_normativo_cobertura'],
-        evidence=e+ve+em+se+me,warnings=warnings,trial=trial,
-        recommendations=['Reduzir cobertura não-PET e verificar condições específicas do SEP-01'] if over or requires_trial else [],
-        details={'cobertura_pct':float(pct),'limite_indicativo_pct':int(threshold),'acima_indicacao':over,'gatilho_sep01':requires_trial})
+    # Não inferir ausência de decoração apenas porque rótulo e sleeve não aparecem.
+    deco,_,ed,_=c.read('tipo_decoracao')
+    direct_print=norm(deco.get('tipo_decoracao')) in {'impressao_direta','direta','outras','outra'}
+    presence={x:c.presence(x) for x in ('rotulo','sleeve')}
+    if all(v=='NAO' for v in presence.values()) and not direct_print:
+        return c.result('PET-04','NAO_APLICAVEL','Rótulo e sleeve comprovadamente ausentes; nenhuma outra decoração relevante confirmada')
+    if all(v!='SIM' for v in presence.values()) and not direct_print:
+        return c.result('PET-04',reason='Presença de decoração relevante não confirmada',missing=['presenca_rotulo_ou_sleeve'])
+
+    md,mm,em,_=c.read('metodo_cobertura')
+    method=norm(md.get('metodo_cobertura'))
+    pcd,_,ep,_=c.read('cobertura_nao_pet_pct')
+    declared=decimal_value(pcd.get('cobertura_nao_pet_pct'))
+    details={'procedimento':'PTI-PET04-001 v0.1','comprovacao_nir':False}
+    evidence=ed+em+ep
+    warnings=[];missing=[]
+    if declared is not None and not Decimal(0)<=declared<=Decimal(100):
+        return c.result('PET-04',reason='Cobertura fora do intervalo de 0 a 100%',missing=['cobertura_nao_pet_pct_valida'],evidence=evidence)
+    measured,geometry,gm,eg,gw=_pet04_geometric_coverage(c,method)
+    details.update(geometry);evidence+=eg;warnings+=gw;missing+=gm
+    if method in {'m1','m2'}:
+        pct=measured
+        details['origem_cobertura']='calculada_M1_M2'
+        if measured is not None and declared is not None and abs(measured-declared)>Decimal('0.01'):
+            # Não escolher silenciosamente um de dois resultados discordantes.
+            missing.append('conciliacao_percentuais_cobertura')
+            warnings.append('Percentual informado diverge da medição geométrica; conferir registro')
+            pct=None
+    else:
+        pct=declared
+        details['origem_cobertura']='percentual_informado'
+        if method and method not in {'m1','m2'}:
+            warnings.append('Método legado de cobertura: indicador não homologado pelo PTI-PET04-001')
+        else:
+            missing.append('metodo_cobertura')
+
+    volume,_,ev,_=c.read('volume_ml')
+    if 'volume_ml' not in volume:
+        v,_,ev2,_=c.read('capacidade_ml');volume={'volume_ml':v.get('capacidade_ml')};ev+=ev2
+    vol=decimal_value(volume.get('volume_ml'))
+    evidence+=ev
+    threshold=Decimal(50) if vol is not None and vol>0 and vol<=500 else Decimal(70) if vol is not None and vol>500 else None
+    if threshold is None:missing.append('volume_ml')
+    if pct is None:missing.append('cobertura_nao_pet_pct')
+    if pct is not None:details['cobertura_pct']=float(pct)
+    if threshold is not None:details['limite_indicativo_pct']=int(threshold)
+    over=None;band='INDETERMINADO'
+    if pct is not None and threshold is not None:
+        ud,_,ue,_=c.read('incerteza_cobertura_pct');evidence+=ue
+        uncert=decimal_value(ud.get('incerteza_cobertura_pct'))
+        if 'incerteza_cobertura_pct' in ud and (uncert is None or uncert<0 or uncert>100):
+            missing.append('incerteza_cobertura_pct_valida')
+        elif uncert is not None and max(Decimal(0),pct-uncert)<=threshold<min(Decimal(100),pct+uncert):
+            band='LIMITROFE';warnings.append('Incerteza declarada atravessa o limite indicativo')
+        else:
+            over=pct>threshold
+            band='ACIMA' if over else 'ATE_LIMITE'
+        details.update({'acima_indicacao':over,'faixa_indicativa':band})
+        if over:warnings.append(f'Cobertura {float(pct):g}% excede indicação preventiva de {int(threshold)}%')
+    else:
+        details.update({'acima_indicacao':None,'faixa_indicativa':band})
+
+    # Gatilhos documentados de triagem são independentes do alerta 50/70%.
+    pol,_,e_pol,_=c.read('polimero_rotulo','polimero_decoracao','sleeve_tipo','tipo_rotulo','tinta_metalica','metalizacao_decoracao')
+    evidence+=e_pol
+    reasons=[];uncertain=[]
+    if presence['sleeve']=='SIM':
+        if norm(pol.get('sleeve_tipo'))=='integral':reasons.append('sleeve_integral')
+        elif not norm(pol.get('sleeve_tipo')):uncertain.append('sleeve_tipo')
+    if presence['rotulo']=='SIM' and pct is not None and pct>50:
+        polymer=norm(pol.get('polimero_rotulo') or pol.get('polimero_decoracao'))
+        if polymer and polymer not in {'pet','desconhecido','outro','nao_informado'}:
+            reasons.append('rotulo_outro_polimero_acima_50')
+        elif not polymer or polymer in {'desconhecido','outro','nao_informado'}:
+            uncertain.append('polimero_rotulo')
+    if 'metaliz' in norm(pol.get('tipo_rotulo')) or yes(pol.get('tinta_metalica')) is True or yes(pol.get('metalizacao_decoracao')) is True:
+        reasons.append('metalizacao')
+    # Campo legado positivo permanece aceito como informação técnica, sem dispensar verificação.
+    legacy,_,e_legacy,_=c.read('criterio_sep01');evidence+=e_legacy
+    if yes(legacy.get('criterio_sep01')) is True:reasons.append('gatilho_sep01_registrado')
+    reasons=sorted(set(reasons))
+    trial='REQUERIDO' if reasons else 'PENDENTE' if uncertain else 'ALERTA' if over else 'NAO_REQUERIDO'
+    details.update({'gatilho_sep01':bool(reasons),'gatilhos_sep01':reasons,
+                    'gatilhos_a_esclarecer':sorted(set(uncertain))})
+    if uncertain:missing+=uncertain
+    if reasons:warnings.append('Verificar aplicação do SEP-01 conforme as características identificadas')
+    missing.append('comprovacao_identificabilidade_NIR')
+    return c.result('PET-04','INCONCLUSIVO',
+        'Cobertura indicativa avaliada; identificabilidade NIR ainda não comprovada',
+        missing=missing,evidence=evidence,warnings=warnings,trial=trial,
+        recommendations=['Reduzir cobertura não-PET e verificar gatilhos SEP-01'] if over or reasons else [],
+        details=details)
 
 
 def r07(c:Context)->Outcome:
