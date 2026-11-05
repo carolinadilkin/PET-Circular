@@ -32,6 +32,10 @@
 
 ## Testes
 
-- Suíte original e v0.4: 102 testes unitários e de API (`python -m unittest discover -s tests -v`).
+- Suíte original e v0.4: 127 testes reportados após a atualização PET-16; executar novamente para conferir o total atual (`python -m unittest discover -s tests -v`).
 - Navegador headless Chromium com HTML/CSS/JS reais e endpoints Python executados por ponte local em memória: jornada de criação, avaliação, comparação A/B, importação JSON e salvamento de snapshot; nenhuma exceção JS observada, sem rolagem horizontal de página a 390 px.
 - Acesso HTTP via FastAPI TestClient e servidor local verificado. Não foi possível executar browser direto para `localhost` no ambiente de teste devido a uma restrição de rede do executor, portanto é necessária verificação final da abertura no Windows.
+
+## Uso correto na fase de design
+
+A comparação A/B da PoC representa uma análise preventiva: A é referência comercial observada; B é proposta ainda não fabricada. Campos de B não devem ser artificialmente marcados `CONFIRMADO` sem evidência. Uma regra que requer confirmação continua inconclusiva nesse estágio. A IA pode sugerir extrações, mas exige revisão humana antes de alimentar o motor. Ver `ALINHAMENTO_DESAFIO2_CASO_REAL.md`.
