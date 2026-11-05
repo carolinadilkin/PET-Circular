@@ -36,6 +36,20 @@ class WebAPI(unittest.TestCase):
         self.assertIn('function renderComparison',script.text)
         self.assertNotIn('Somente simulação visual',index.text)
 
+    def test_import_rejects_non_project_json_with_actionable_error(self):
+        for payload in ('{"title":"relatorio"}', '[]', '{"results":[]}'):
+            response=self.client.post('/api/projects/import',data=payload,
+                                      headers={**self.headers,'Content-Type':'application/json'})
+            self.assertEqual(response.status_code,422,response.text)
+            self.assertIn('não é um projeto PET Circular',response.json()['detail'])
+
+    def test_manual_form_hides_basic_duplicates_and_explains_body_only(self):
+        script=self.client.get('/static/app.js').text
+        self.assertIn("const coreKeys = new Set(",script)
+        self.assertIn("groupedFields(fields)",script)
+        self.assertIn("PET-02 considera somente polímeros adicionais incorporados ao CORPO",script)
+        self.assertIn("Extraído — não confirmado",script)
+
     def test_mutations_require_local_token(self):
         r=self.client.post('/api/assessment',json={'case':self.a})
         self.assertEqual(r.status_code,403)
