@@ -97,6 +97,12 @@ def _case(value: Any) -> dict:
 @app.post('/api/projects/import')
 async def import_project(request: Request):
     data = await request.body()
+    try:
+        decoded = json.loads(data)
+    except (ValueError, UnicodeDecodeError) as exc:
+        raise ValueError('JSON inválido. Importe um projeto exportado em Projetos → Exportar entrada.') from exc
+    if not isinstance(decoded, dict) or not {'project_id', 'product_id', 'product_name', 'facts', 'components', 'documents', 'matrix_version'}.issubset(decoded):
+        raise ValueError('Este JSON não é um projeto PET Circular. Relatórios, listas e documentos genéricos não podem ser importados como projeto. Use Projetos → Exportar entrada.')
     return {'case': import_case(data)}
 
 
