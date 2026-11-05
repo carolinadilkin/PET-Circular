@@ -1,6 +1,6 @@
 # PET Circular v0.4 — Especificação de experiência e interface
 
-**Status:** proposta de design revisada; **não implementada no aplicativo**.  
+**Status em 03/11/2026:** especificação de design ainda não implementada naquele momento. **Atualização posterior:** a interface Web v0.4 foi implementada; diferenças e limitações constam em `WEB_V04_IMPLEMENTACAO.md`.  
 **Data:** 03/11/2026 · **Referência:** aplicativo v0.3.1 (branch `feature/assistant-ecodesign-v0.3`), matriz científica v0.3.3 e relatórios sintéticos integrados A/B.  
 **Objetivo de produto:** permitir que alguém sem conhecimento prévio da interface consiga avaliar uma embalagem PET, compreender limitações e comparar alternativas de ecodesign sem depender de um roteiro externo.
 
@@ -169,3 +169,15 @@ Não somar status como um índice global de reciclabilidade. Destacar se `matrix
 ## 13. O que o protótipo demonstra (e não demonstra)
 
 `PROTOTIPO_NAVEGAVEL_v04.html` é uma **demonstração estática interativa de design**. Incorpora os resultados sintéticos A/B já produzidos para ilustrar o comportamento visual de comparação e dos estados; os dados e números não vêm de uma nova avaliação do motor. O protótipo **não processa PDFs ou JSON, não armazena dados, não utiliza API e não substitui a aplicação Streamlit**.
+
+## 14. Adendo — persona, momento de uso e avaliação A/B
+
+- **Usuária principal:** engenharia de desenvolvimento de embalagens, no planejamento, especificação ou revisão de um design PET transparente.
+- **Apoio:** especialistas em sustentabilidade, qualidade e materiais.
+- **Design A:** amostra comercial existente, documentada e observada, para servir como linha de base, não como única finalidade da ferramenta.
+- **Design B:** alteração de projeto proposta antes da fabricação; hipóteses e dados não confirmados devem permanecer claramente identificados.
+- **Comparação:** diferenças por critério e pendências de evidência, sem nota global ou certificação.
+- **IA:** extração assistida de especificações com validação humana; o motor decide conforme regras rastreáveis.
+- **Estados de maturidade:** ideação/desenvolvimento/validação orientam a interpretação dos campos, sem alegar que já existam como modos automáticos no aplicativo.
+
+Ver `ALINHAMENTO_DESAFIO2_CASO_REAL.md` para a correspondência com o edital do Desafio 2.
