@@ -48,8 +48,16 @@ Para a suíte completa (incluindo testes legados de Streamlit) no repositório, 
 
 ## Atualização PET-04 (motor v0.1.1)
 
-O procedimento interno [PTI-PET04-001](docs/PTI-PET04-001.md) permite registrar M1 (áreas de frente/verso; prevalece maior proporção) ou M2 (área lateral), além do percentual legado. Gatilhos SEP-01 independentes (rótulo de outro polímero >50%, sleeve integral, metalização) são apontados quando identificados. A geometria **não** comprova o desempenho NIR, por isso a PET-04 permanece inconclusiva sem validação específica. Próxima tarefa técnica: [PET-16](docs/PROXIMA_PET16.md).
+O procedimento interno [PTI-PET04-001](docs/PTI-PET04-001.md) permite registrar M1 (áreas de frente/verso; prevalece maior proporção) ou M2 (área lateral), além do percentual legado. Gatilhos SEP-01 independentes (rótulo de outro polímero >50%, sleeve integral, metalização) são apontados quando identificados. A geometria **não** comprova o desempenho NIR, por isso a PET-04 permanece inconclusiva sem validação específica. A PET-16 também foi implementada; consulte a seção abaixo e [PTI-PET16-001](docs/PTI-PET16-001.md).
 
 ## PET-16 — dimensões após compactação (motor 0.1.2)
 
 A PET-16 distingue `>5 L` de dimensão compactada `≤4 cm`, com fonte, protocolo e confirmação operacional explícitos. Sem medição adequada, o critério permanece inconclusivo. `NAO_ACIONADA` não é certificação. Detalhes em `docs/PTI-PET16-001.md`.
+
+## Alinhamento científico e caso de validação
+
+O **Desafio 2 — Soluções para Avaliar e Melhorar a Reciclabilidade de Embalagens Plásticas Utilizando Dados e Inteligência Artificial** admite expressamente análises desde a **concepção e o design**. A persona principal desta PoC é a pessoa de engenharia/desenvolvimento de embalagens; sustentabilidade, qualidade e materiais são personas de apoio. O PET Circular apoia decisões preventivas de *Design for Recycling* em garrafas PET transparentes, sem certificar a reciclabilidade final.
+
+O estudo de caso deve comparar **Design A** (embalagem comercial existente como referência técnica observada) com **Design B** (redesenho hipotético proposto antes da fabricação). O B não deve ser relatado como produto real ou ensaiado. Resultados devem ser comparativos, por exemplo contagem de critérios incompatíveis, inconclusivos e pendentes e transições por regra, sem converter tais contagens em um índice global sem validação. A IA ajuda a extrair dados de especificações/documentos, com conferência humana; o motor de regras continua determinístico. Os estados de maturidade *ideação, desenvolvimento e validação* são uma **interpretação metodológica**, não três modos de software já implementados.
+
+Ver protocolo em [Alinhamento ao Desafio 2 e estudo de caso A/B](docs/ALINHAMENTO_DESAFIO2_CASO_REAL.md).

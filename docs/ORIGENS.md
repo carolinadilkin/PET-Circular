@@ -8,4 +8,4 @@ O arquivo de referência local `PET_Circular_v033_Piloto_Embalagem_Real.xlsx` po
 
 A planilha de trabalho e os documentos industriais não são incluídos automaticamente no repositório. O aplicativo contém dados de exemplo documental e um PDF explicitamente sintético.
 
-Este código é uma prova de conceito, não constitui avaliação certificada pela RecyClass. As pendências PET-04, PET-16, o balanço gravimétrico completo e a validação com embalagens reais permanecem documentadas no README.
+Este código é uma prova de conceito, não constitui avaliação certificada pela RecyClass. PET-04 e PET-16 já foram tratadas no motor/documentação; permanecem a validação com estudo de caso real e a coleta de evidências técnicas faltantes, incluindo balanço gravimétrico quando necessário. A ferramenta é destinada a decisões preventivas em design e não certifica embalagens.
